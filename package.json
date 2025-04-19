@@ -1,12 +1,13 @@
 {
   "name": "demo",
-  "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky"
   },
   "dependencies": {
     "vue": "^3.5.13"
@@ -17,6 +18,7 @@
     "@commitlint/config-conventional": "^19.8.0",
     "@vitejs/plugin-vue": "^5.2.2",
     "@vue/tsconfig": "^0.7.0",
+    "commitlint": "^19.8.0",
     "cz-git": "^1.11.1",
     "eslint": "^9.25.0",
     "husky": "^9.1.7",

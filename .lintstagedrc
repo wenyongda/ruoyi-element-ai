@@ -1,21 +1,19 @@
 {
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "prettier --write",
-      "eslint --fix",
-      "tsc --noEmit --pretty false --skipLibCheck",
-      "git add"
-    ],
-    "*.{json,js,jsx}": [
-      "prettier --write",
-      "eslint --fix",
-      "git add"
-    ],
-    "*.vue": [
-      "prettier --write",
-      "eslint --fix",
-      "vue-tsc --noEmit --skipLibCheck",
-      "git add"
-    ]
-  }
+  "*.{ts,tsx}": [
+    "prettier --write",
+    "eslint --fix",
+    "tsc --noEmit --pretty false --skipLibCheck",
+    "git add"
+  ],
+  "*.{json,js,jsx}": [
+    "prettier --write",
+    "eslint --fix",
+    "git add"
+  ],
+  "*.vue": [
+    "prettier --write",
+    "eslint --fix",
+    "vue-tsc --noEmit --skipLibCheck",
+    "git add"
+  ]
 }

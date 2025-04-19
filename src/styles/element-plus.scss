@@ -1,0 +1,7 @@
+.el-form{
+  .el-form-item{
+    &:nth-last-child(1){
+      margin-bottom: 0px;
+    }
+  }
+}

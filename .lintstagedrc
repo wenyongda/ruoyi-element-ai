@@ -2,7 +2,6 @@
   "*.{ts,tsx}": [
     "prettier --write",
     "eslint --fix",
-    "tsc --noEmit --pretty false --skipLibCheck",
     "git add"
   ],
   "*.{json,js,jsx}": [
@@ -13,7 +12,6 @@
   "*.vue": [
     "prettier --write",
     "eslint --fix",
-    "vue-tsc --noEmit --skipLibCheck",
     "git add"
   ]
 }

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { ConversationItem } from 'vue-element-plus-x/types/components/Conversations/types';
+import type { ConversationItem } from 'vue-element-plus-x/types/Conversations';
 import { Conversations } from 'vue-element-plus-x';
 import { useRoute, useRouter } from 'vue-router';
 

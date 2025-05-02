@@ -17,7 +17,7 @@
     "reset-css": "^5.0.2",
     "vue": "^3.5.13",
     "vue-router": "4",
-    "vue-element-plus-x": "file:../element-plus-x/packages/components"
+    "vue-element-plus-x": "^1.1.2-beta"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.12.0",

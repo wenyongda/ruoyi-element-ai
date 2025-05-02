@@ -1,10 +1,11 @@
+import type { HookFetchPlugin } from 'hook-fetch';
 import hookFetch from 'hook-fetch';
 import { sseTextDecoderPlugin } from 'hook-fetch/plugins';
 
 interface BaseResponse {
   code: number;
   data: null;
-  message: string;
+  msg: string;
 }
 
 const instance = hookFetch.create<BaseResponse, unknown, 'data'>({
@@ -15,9 +16,17 @@ const instance = hookFetch.create<BaseResponse, unknown, 'data'>({
   plugins: [sseTextDecoderPlugin()],
 });
 
-function jwtPlugin() {
+function jwtPlugin(): HookFetchPlugin<BaseResponse> {
   return {
     name: 'jwt',
+    afterResponse: async (response) => {
+      console.log(response);
+      if (response.result?.code === 200) {
+        return response;
+      }
+      // alert(response.result?.msg);
+      return Promise.reject(response);
+    },
   };
 }
 

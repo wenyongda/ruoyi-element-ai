@@ -12,7 +12,12 @@ export default defineConfig({
     UnoCSS(),
     vue(),
     AutoImport({
+      imports: ["vue"],
+      eslintrc: {
+        enabled: true,
+      },
       resolvers: [ElementPlusResolver()],
+      dts: path.resolve(__dirname, "./src/auto-imports.d.ts"),
     }),
     Components({
       resolvers: [ElementPlusResolver()],

@@ -14,6 +14,7 @@ async function handleSubmit() {
   try {
     await formRef.value?.validate();
     const _res = await login(formModel);
+    console.log(_res, 'res');
   }
   catch (error) {
     console.error('请求错误:', error);

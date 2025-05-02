@@ -2,7 +2,17 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import { jwtGuard } from './permissions';
 
 const routes = [
-  { path: '/', component: () => import('@/components/HelloWorld.vue') },
+  {
+    path: '/',
+    component: () => import('@/layout/index.vue'),
+    children: [
+      {
+        path: ':id',
+        name: 'chat',
+        component: () => import('@/pages/chat/index.vue'),
+      },
+    ],
+  },
   {
     path: '/login',
     name: 'login',

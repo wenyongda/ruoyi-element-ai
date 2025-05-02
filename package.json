@@ -13,10 +13,11 @@
   },
   "dependencies": {
     "element-plus": "^2.9.8",
-    "hook-fetch": "^0.0.2",
+    "hook-fetch": "^0.0.9-beta",
     "reset-css": "^5.0.2",
     "vue": "^3.5.13",
-    "vue-router": "4"
+    "vue-router": "4",
+    "vue-element-plus-x": "file:../element-plus-x/packages/components"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.12.0",

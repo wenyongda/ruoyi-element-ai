@@ -1,4 +1,4 @@
-import type { LoginDTO } from './types';
+import type { LoginDTO, LoginVO } from './types';
 import { post } from '@/utils/request';
 
-export const login = (data: LoginDTO) => post('/auth/login', data);
+export const login = (data: LoginDTO) => post<LoginVO>('/auth/login', data);

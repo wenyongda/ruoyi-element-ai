@@ -1,11 +1,21 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
+import {
+  createRouter,
+  createWebHashHistory,
+
+} from 'vue-router';
 import { jwtGuard } from './permissions';
 
-const routes = [
+const routes: Readonly<RouteRecordRaw>[] = [
   {
     path: '/',
     component: () => import('@/layout/index.vue'),
     children: [
+      {
+        path: '',
+        name: 'chatWithoutId',
+        component: () => import('@/pages/chat/index.vue'),
+      },
       {
         path: ':id',
         name: 'chat',
@@ -18,7 +28,7 @@ const routes = [
     name: 'login',
     component: () => import('@/pages/login/index.vue'),
   },
-];
+] as const;
 
 const router = createRouter({
   history: createWebHashHistory(),

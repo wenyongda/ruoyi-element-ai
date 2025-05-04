@@ -13,11 +13,13 @@
   },
   "dependencies": {
     "element-plus": "^2.9.8",
-    "hook-fetch": "^0.0.9-beta",
+    "hook-fetch": "^1.0.1",
+    "pinia": "^3.0.2",
+    "pinia-plugin-persistedstate": "^4.2.0",
     "reset-css": "^5.0.2",
     "vue": "^3.5.13",
-    "vue-router": "4",
-    "vue-element-plus-x": "^1.1.2-beta"
+    "vue-element-plus-x": "1.1.5-beta",
+    "vue-router": "4"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.12.0",

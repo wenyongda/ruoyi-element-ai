@@ -1,4 +1,5 @@
 import type { HookFetchPlugin } from 'hook-fetch';
+import { ElMessage } from 'element-plus';
 import hookFetch from 'hook-fetch';
 import { sseTextDecoderPlugin } from 'hook-fetch/plugins';
 
@@ -8,7 +9,7 @@ interface BaseResponse {
   msg: string;
 }
 
-const instance = hookFetch.create<BaseResponse, unknown, 'data'>({
+export const request = hookFetch.create<BaseResponse, 'data'>({
   baseURL: 'https://web.pandarobot.chat/api',
   headers: {
     'Content-Type': 'application/json',
@@ -24,18 +25,16 @@ function jwtPlugin(): HookFetchPlugin<BaseResponse> {
       if (response.result?.code === 200) {
         return response;
       }
-      // alert(response.result?.msg);
+      ElMessage.error(response.result?.msg);
       return Promise.reject(response);
     },
   };
 }
 
-instance.use(jwtPlugin());
+request.use(jwtPlugin());
 
-export const request = instance.request;
+export const post = request.post;
 
-export const post = instance.post;
+export const get = request.get;
 
-export const get = instance.get;
-
-export default instance;
+export default request;

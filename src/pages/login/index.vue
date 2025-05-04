@@ -2,7 +2,11 @@
 import type { LoginDTO } from '@/api/auth/types';
 import type { FormInstance } from 'element-plus';
 import { login } from '@/api';
+import { useUserStore } from '@/store';
 import { reactive, ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const userStore = useUserStore();
 
 const formRef = ref<FormInstance>();
 
@@ -10,11 +14,16 @@ const formModel = reactive<LoginDTO>({
   username: '',
   password: '',
 });
+
+const router = useRouter();
 async function handleSubmit() {
   try {
     await formRef.value?.validate();
-    const _res = await login(formModel);
-    console.log(_res, 'res');
+    const res = await login(formModel);
+    console.log(res, 'res');
+    res.data.token && userStore.setToken(res.data.token);
+    res.data.userInfo && userStore.setUserInfo(res.data.userInfo);
+    router.replace('/');
   }
   catch (error) {
     console.error('请求错误:', error);

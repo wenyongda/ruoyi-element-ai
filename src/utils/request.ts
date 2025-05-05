@@ -1,15 +1,17 @@
 import type { HookFetchPlugin } from 'hook-fetch';
+import { useUserStore } from '@/store';
 import { ElMessage } from 'element-plus';
 import hookFetch from 'hook-fetch';
 import { sseTextDecoderPlugin } from 'hook-fetch/plugins';
 
 interface BaseResponse {
   code: number;
-  data: null;
+  data: never;
   msg: string;
+  rows: never;
 }
 
-export const request = hookFetch.create<BaseResponse, 'data'>({
+export const request = hookFetch.create<BaseResponse, 'data' | 'rows'>({
   baseURL: 'https://web.pandarobot.chat/api',
   headers: {
     'Content-Type': 'application/json',
@@ -18,8 +20,14 @@ export const request = hookFetch.create<BaseResponse, 'data'>({
 });
 
 function jwtPlugin(): HookFetchPlugin<BaseResponse> {
+  const userStore = useUserStore();
   return {
     name: 'jwt',
+    beforeRequest: async (config) => {
+      config.headers = new Headers(config.headers);
+      config.headers.set('authorization', `Bearer ${userStore.token}`);
+      return config;
+    },
     afterResponse: async (response) => {
       console.log(response);
       if (response.result?.code === 200) {

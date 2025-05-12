@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@jsonlee_12138/enum':
+        specifier: ^1.0.1
+        version: 1.0.1
       element-plus:
         specifier: ^2.9.8
         version: 2.9.8(vue@3.5.13(typescript@5.7.3))
@@ -643,6 +646,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@jsonlee_12138/enum@1.0.1':
+    resolution: {integrity: sha512-33Zgvu3Oi0FblWdyuOOU1oFr1GDxNMloyVRPDMc+riOPZlQcP+TdHJODd6lZuZWOETPCIyaBdYaElZe0XoyZsA==}
 
   '@jsonlee_12138/markdown-it-mermaid@0.0.3':
     resolution: {integrity: sha512-PLIexJKys3ml67M5NmTJv+8hZUX36VwHLvbW82QfxVzMCfiutigA2qjrvLZd/WjSr6Ut9vbSwgAlh9CMLPA8SQ==}
@@ -4605,6 +4611,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@jsonlee_12138/enum@1.0.1': {}
 
   '@jsonlee_12138/markdown-it-mermaid@0.0.3(markdown-it@14.1.0)(mermaid@11.6.0)':
     dependencies:

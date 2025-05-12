@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { createSession } from '@/api';
 import { send } from '@/api/chat';
+import { ModelEnum } from '@/constants/enums';
 import { useUserStore } from '@/store';
 import { useChatStore } from '@/store/modules/chat';
 import { BubbleList, Sender } from 'vue-element-plus-x';
@@ -61,7 +62,7 @@ async function handleSend() {
   loading.value = true;
   const req = send({
     sessionId: chatId.value,
-    model: 'gpt-4o-mini',
+    model: ModelEnum.GPT_4o_MINI.value,
     messages: [
       {
         role: 'user',

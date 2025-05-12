@@ -1,3 +1,5 @@
+import type { ModelType } from '@/constants/enums';
+
 /**
  * ChatRequest，描述：对话请求对象
  */
@@ -19,7 +21,7 @@ export interface SendDTO {
    */
   kid?: string;
   messages: Message[];
-  model: string;
+  model: ModelType;
   /**
    * 提示词
    */

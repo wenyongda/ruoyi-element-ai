@@ -12,6 +12,7 @@
     "fix": "eslint . --fix"
   },
   "dependencies": {
+    "@jsonlee_12138/enum": "^1.0.1",
     "element-plus": "^2.9.8",
     "hook-fetch": "^1.0.1",
     "pinia": "^3.0.2",

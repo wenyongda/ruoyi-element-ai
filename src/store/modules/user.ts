@@ -1,10 +1,12 @@
 import type { LoginUser } from '@/api/auth/types';
 import { defineStore } from 'pinia';
+import { useRouter } from 'vue-router';
 
 export const useUserStore = defineStore(
   'user',
   () => {
     const token = ref<string>();
+    const router = useRouter();
     const setToken = (value: string) => {
       token.value = value;
     };
@@ -20,9 +22,10 @@ export const useUserStore = defineStore(
       userInfo.value = void 0;
     };
 
-    const logout = () => {
+    const logout = async () => {
       // 如果需要调用接口，可以在这里调用
       clearToken();
+      router.replace({ name: 'login' });
       clearUserInfo();
     };
 

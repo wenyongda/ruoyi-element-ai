@@ -12,11 +12,11 @@ interface BaseResponse {
 }
 
 export const request = hookFetch.create<BaseResponse, 'data' | 'rows'>({
-  baseURL: 'https://web.pandarobot.chat/api',
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
-  plugins: [sseTextDecoderPlugin()],
+  plugins: [sseTextDecoderPlugin({ json: true, prefix: 'data:' })],
 });
 
 function jwtPlugin(): HookFetchPlugin<BaseResponse> {
@@ -29,9 +29,12 @@ function jwtPlugin(): HookFetchPlugin<BaseResponse> {
       return config;
     },
     afterResponse: async (response) => {
-      console.log(response);
+      // console.log(response);
       if (response.result?.code === 200) {
         return response;
+      }
+      if (response.result?.code === 401) {
+        userStore.logout();
       }
       ElMessage.error(response.result?.msg);
       return Promise.reject(response);

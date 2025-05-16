@@ -1,15 +1,11 @@
 import type { RouteRecordRaw } from 'vue-router';
-import {
-  createRouter,
-  createWebHashHistory,
-
-} from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import { jwtGuard } from './permissions';
 
 const routes: Readonly<RouteRecordRaw>[] = [
   {
     path: '/',
-    component: () => import('@/layout/index.vue'),
+    component: () => import('@/layouts/index.vue'),
     children: [
       {
         path: '',

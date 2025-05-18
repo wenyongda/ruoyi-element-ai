@@ -1,10 +1,11 @@
 import type { RouteRecordRaw } from 'vue-router';
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import { jwtGuard } from './permissions';
 
 const routes: Readonly<RouteRecordRaw>[] = [
   {
     path: '/',
+    redirect: '/chat',
     component: () => import('@/layouts/index.vue'),
     children: [
       {
@@ -14,8 +15,13 @@ const routes: Readonly<RouteRecordRaw>[] = [
       },
       {
         path: ':id',
-        name: 'chat',
+        name: '/chat',
         component: () => import('@/pages/chat/index.vue'),
+      },
+      {
+        path: '/chat/home',
+        name: 'chatHome',
+        component: () => import('@/pages/chat/home/index.vue'),
       },
     ],
   },
@@ -27,7 +33,7 @@ const routes: Readonly<RouteRecordRaw>[] = [
 ] as const;
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 

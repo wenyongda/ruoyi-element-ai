@@ -12,6 +12,7 @@
     "fix": "eslint . --fix"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
     "@jsonlee_12138/enum": "^1.0.4",
     "@vueuse/core": "^13.2.0",
     "element-plus": "^2.9.10",
@@ -26,19 +27,18 @@
     "vue-router": "4"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.13.0",
+    "@antfu/eslint-config": "^4.13.1",
     "@changesets/cli": "^2.29.4",
     "@commitlint/config-conventional": "^19.8.1",
     "@vitejs/plugin-vue": "^5.2.4",
     "@vue/tsconfig": "^0.7.0",
     "commitlint": "^19.8.1",
     "cz-git": "^1.11.1",
-    "eslint": "^9.26.0",
+    "eslint": "^9.27.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.0.0",
     "prettier": "^3.5.3",
-    "sass-embedded": "^1.88.0",
-    "stylelint": "^16.19.1",
+    "sass-embedded": "^1.89.0",
     "typescript": "~5.8.3",
     "unocss": "66.1.2",
     "unplugin-auto-import": "^19.2.0",

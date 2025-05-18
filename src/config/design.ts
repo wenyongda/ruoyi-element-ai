@@ -1,5 +1,12 @@
 export type LayoutType = 'vertical';
 
+// 仿豆包折叠逻辑
+export type CollapseType =
+  | 'alwaysCollapsed' // 始终折叠
+  | 'followSystem' // 跟随系统视口宽度
+  | 'alwaysExpanded' // 始终打开
+  | 'narrowExpandWideCollapse'; // 系统视口 宽小则张，宽大则收
+
 export interface DesignConfigState {
   // 系统主题
   darkMode: 'light' | 'dark' | 'inverted';
@@ -13,12 +20,10 @@ export interface DesignConfigState {
   pageAnimateType: string;
   // 布局模式 (纵向：vertical | ... | 自己定义)
   layout: LayoutType;
-  // 是否折叠菜单-视口宽度自动决定
+  // 折叠类型
+  collapseType: CollapseType;
+  // 是否折叠菜单
   isCollapse: boolean;
-  // 是否折叠菜单-用户意愿点击决定
-  isCollapseManual: boolean;
-  // 最终是否折叠菜单，动态根据上述两种折叠条件决定
-  isCollapseFinal: boolean;
 }
 
 export const themeColorList: string[] = [
@@ -56,12 +61,10 @@ const design: DesignConfigState = {
   pageAnimateType: 'zoom-fade',
   // 布局模式 (纵向：vertical | ... | 自己定义)
   layout: 'vertical',
-  // 是否折叠菜单-视口宽度自动决定
+  // 折叠类型
+  collapseType: 'followSystem',
+  // 是否折叠菜单
   isCollapse: false,
-  // 是否折叠菜单-用户手动控制决定
-  isCollapseManual: false,
-  // 最终是否折叠菜单，动态根据上述两种折叠条件决定
-  isCollapseFinal: false,
 };
 
 export default design;

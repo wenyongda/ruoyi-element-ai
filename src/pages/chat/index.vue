@@ -3,10 +3,8 @@ import { BubbleList, Sender } from 'vue-element-plus-x';
 import { useRoute, useRouter } from 'vue-router';
 import { createSession } from '@/api';
 import { send } from '@/api/chat';
-import IconSelect from '@/components/IconSelect/index.vue';
 import { ModelEnum } from '@/constants/enums';
 import { useUserStore } from '@/store';
-
 import { useChatStore } from '@/store/modules/chat';
 
 const route = useRoute();
@@ -85,9 +83,7 @@ async function handleSend() {
 </script>
 
 <template>
-  <div>
-    <IconSelect />
-
+  <div class="chat-container">
     <BubbleList :list="chatList">
       <template #content="{ item }">
         {{ item.content }}

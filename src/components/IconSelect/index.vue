@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { useClipboard } from '@vueuse/core';
 import SvgIcon from '@/components/SvgIcon/index.vue';
 import icons from './requireIcons';
 
 const emits = defineEmits(['selected']);
+const { copy } = useClipboard();
 
 const name = ref('');
 const iconList = ref(icons);
@@ -12,9 +14,7 @@ function filterIcons() {
   if (name.value) {
     let index = 0;
     iconList.value.forEach((icons) => {
-      iconList.value[index].iconList = icons.iconList.filter(item =>
-        item.includes(name.value),
-      );
+      iconList.value[index].iconList = icons.iconList.filter(item => item.includes(name.value));
       index++;
     });
   }
@@ -22,6 +22,7 @@ function filterIcons() {
 
 function selectedIcon(name: string) {
   emits('selected', name);
+  copy(name);
   document.body.click();
 }
 </script>
@@ -51,16 +52,12 @@ function selectedIcon(name: string) {
           :label="classify.classifyName"
         >
           <div class="grid-container">
-            <div
-              v-for="item of classify.iconList"
-              :key="item"
-              @click="selectedIcon(item)"
-            >
+            <div v-for="item of classify.iconList" :key="item" @click="selectedIcon(item)">
               <div class="icon-item flex-center flex-col gap-3px">
                 <SvgIcon :name="item" />
-                <span class="icon_name text-overflow max-w-80px">{{
-                  item
-                }}</span>
+                <span class="icon_name text-overflow max-w-80px">
+                  {{ item }}
+                </span>
               </div>
             </div>
           </div>
@@ -78,6 +75,7 @@ function selectedIcon(name: string) {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
   }
+
   .icon-item {
     cursor: pointer;
     padding: 0px 4px;
@@ -87,13 +85,16 @@ function selectedIcon(name: string) {
     text-align: center;
     font-size: 18px;
   }
+
   .icon-item:hover {
     box-shadow: 1px 1px 10px 0 #a1a1a1;
   }
+
   .el-tab-pane {
     height: 200px;
     overflow: auto;
   }
+
   .icon_name {
     display: none;
   }
@@ -104,10 +105,13 @@ function selectedIcon(name: string) {
   .icon-body {
     padding: 10px;
   }
+
   .icon_name {
     display: block;
   }
+
   overflow: hidden;
+
   .grid-container {
     margin-top: 12px;
     position: relative;
@@ -115,7 +119,11 @@ function selectedIcon(name: string) {
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     border-left: 1px solid #eee;
     border-top: 1px solid #eee;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 500px;
   }
+
   .icon-item {
     padding: 16px 0;
     margin: 0 !important;
@@ -136,14 +144,17 @@ function selectedIcon(name: string) {
   .disabled {
     pointer-events: none;
   }
+
   .grid {
     border-top: 1px solid #eee;
   }
 }
+
 .icons-container span {
   font-size: 12px !important;
   color: #99a9bf;
 }
+
 .icons-container svg {
   font-size: 24px !important;
   color: #606266;

@@ -1,4 +1,4 @@
-import type { LayoutType } from '@/config/design';
+import type { CollapseType, LayoutType } from '@/config/design';
 import { defineStore } from 'pinia';
 import designSetting from '@/config/design';
 
@@ -9,9 +9,8 @@ const {
   isPageAnimate,
   pageAnimateType: rePageAnimateType,
   layout: reLayout,
-  isCollapse: reIsCollapse,
-  isCollapseManual: reIsCollapseManual,
-  isCollapseFinal: reIsCollapseFinal,
+  collapseType: reCollapseType,
+  isCollapse: reisCollapse,
 } = designSetting;
 
 export const useDesignStore = defineStore(
@@ -35,25 +34,17 @@ export const useDesignStore = defineStore(
     //   layout.value = layoutType;
     // };
 
-    // 更据视口宽度和阈值-是否展开左侧菜单
-    const isCollapse = ref<boolean>(reIsCollapse);
-    const setCollapse = (collapse: boolean) => {
-      isCollapse.value = collapse;
-    };
-
-    // 是否手动点击展开左侧菜单
-    const isCollapseManual = ref<boolean>(reIsCollapseManual);
-    const setCollapseManual = (collapseManual: boolean): boolean => {
-      isCollapseManual.value = collapseManual;
-      return collapseManual;
+    // 折叠状态
+    const collapseType = ref<CollapseType>(reCollapseType);
+    const setCollapseType = (type: CollapseType) => {
+      collapseType.value = type;
     };
 
     // 最终是否展开左侧菜单
-    const isCollapseFinal = ref<boolean>(reIsCollapseFinal);
+    const isCollapse = ref<boolean>(reisCollapse);
 
     const setCollapseFinal = (collapseFinal: boolean) => {
-      console.log('最终的折叠状态', collapseFinal);
-      isCollapseFinal.value = collapseFinal;
+      isCollapse.value = collapseFinal;
     };
 
     return {
@@ -65,11 +56,9 @@ export const useDesignStore = defineStore(
       pageAnimateType,
       setPageAnimateType,
       layout,
+      collapseType,
+      setCollapseType,
       isCollapse,
-      setCollapse,
-      isCollapseManual,
-      setCollapseManual,
-      isCollapseFinal,
       setCollapseFinal,
     };
   },

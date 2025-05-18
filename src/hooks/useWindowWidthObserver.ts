@@ -1,15 +1,17 @@
 import type { MaybeRef } from 'vue';
 import { onBeforeUnmount, ref, unref, watch } from 'vue';
+import { COLLAPSE_THRESHOLD, SIDE_BAR_WIDTH } from '@/config/index';
 import { useDesignStore } from '@/store/modules/design';
 
 /**
+ * 这里逻辑是研究豆包的折叠逻辑后，设计的折叠方法
  * 基于ResizeObserver的窗口宽度监听hooks（高性能实时监控）
  * @param threshold 宽度阈值（默认600px，支持响应式）
  * @param onChange 自定义回调（传入则覆盖默认逻辑，参数：当前视口宽度是否超过阈值）
  * @returns {object} 包含卸载监听的方法及当前状态
  */
 export function useWindowWidthObserver(
-  threshold: MaybeRef<number> = 600,
+  threshold: MaybeRef<number> = COLLAPSE_THRESHOLD,
   onChange?: (isAboveThreshold: boolean) => void,
 ) {
   const designStore = useDesignStore();
@@ -20,15 +22,40 @@ export function useWindowWidthObserver(
 
   // 默认逻辑：修改全局折叠状态
   const updateCollapseState = (isAbove: boolean) => {
-    if (!isAbove) {
-      // 小于阈值时 且为展开状态时候
-      // 跟随用户当前的意愿
-      designStore.setCollapseFinal(designStore.isCollapseManual);
-      // 如果是开，则执行展开动画表示用户意愿
+    // 判断当前的折叠状态
+    switch (designStore.collapseType) {
+      case 'alwaysCollapsed':
+        designStore.setCollapseFinal(true);
+        break;
+      case 'followSystem':
+        designStore.setCollapseFinal(!isAbove);
+        designStore.setCollapseFinal(!isAbove);
+        break;
+      case 'alwaysExpanded':
+        designStore.setCollapseFinal(false);
+        if (isAbove) {
+          // 大于的时候执行关闭动画
+          console.log('执行关闭动画');
+        }
+        else {
+          // 小于的时候执行打开动画
+          console.log('小于的时候执行打开动画');
+        }
+        break;
+      case 'narrowExpandWideCollapse':
+        designStore.setCollapseFinal(isAbove);
+        designStore.setCollapseFinal(isAbove);
     }
-    else if (!designStore.isCollapseFinal && isAbove) {
-      // 大于阈值时 且为收起状态时
-      designStore.setCollapseFinal(true);
+    console.log('最终的折叠状态：', designStore.isCollapse);
+
+    if (!designStore.isCollapse) {
+      document.documentElement.style.setProperty(
+        `--sidebar-left-container-default-width`,
+        `${SIDE_BAR_WIDTH}px`,
+      );
+    }
+    else {
+      document.documentElement.style.setProperty(`--sidebar-left-container-default-width`, ``);
     }
   };
 

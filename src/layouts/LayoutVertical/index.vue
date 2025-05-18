@@ -4,22 +4,11 @@ import { useWindowWidthObserver } from '@/hooks/useWindowWidthObserver';
 import Aside from '@/layouts/components/Aside/index.vue';
 import Header from '@/layouts/components/Header/index.vue';
 import Main from '@/layouts/components/Main/index.vue';
-
 import { useDesignStore } from '@/store/modules/design';
 
 const designStore = useDesignStore();
 
-// 动态绑定左侧菜单animate动画
-const menuAnimate = computed(() => designStore.pageAnimateType);
-const menuCollapseFinal = computed(() => designStore.isCollapseFinal);
-
-console.log('menuAnimate===>', menuAnimate);
-console.log('menuCollapseFinal===>', menuCollapseFinal);
-
-watch([menuCollapseFinal, menuAnimate], (newValue, oldValue) => {
-  console.log('newValue', newValue);
-  console.log('oldValue', oldValue);
-});
+console.log('每次加载全局的折叠状态', designStore.collapseType);
 
 /** 监听窗口大小变化，折叠侧边栏 */
 useWindowWidthObserver();
@@ -27,40 +16,46 @@ useWindowWidthObserver();
 
 <template>
   <el-container class="layout-container">
-    <el-aside
-      v-if="menuCollapseFinal"
-      class="layout-aside transition-all"
-      :class="menuAnimate"
-    >
-      <el-scrollbar class="layout-scrollbar">
-        <Aside />
-      </el-scrollbar>
-    </el-aside>
-    <el-container>
-      <el-header class="layout-header">
-        <Header />
-      </el-header>
-      <!-- 路由页面 -->
-      <Main />
+    <el-header class="layout-header">
+      <Header />
+    </el-header>
+    <el-container class="layout-container-main">
+      <Transition :class="designStore.pageAnimateType">
+        <Aside v-if="!designStore.isCollapse" class="layout-aside transition-all" />
+      </Transition>
+      <el-main class="layout-main">
+        <!-- 路由页面 -->
+        <Main />
+      </el-main>
     </el-container>
   </el-container>
 </template>
 
 <style lang="scss" scoped>
 .layout-container {
-  width: 100vw;
-  height: 100vh;
-  .layout-aside {
-    // z-index: $layout-aside-z-index; // 左侧菜单层级
-    // padding-right: $aside-menu-padding-right; // 左侧布局右边距[用于悬浮和选择更明显]
-    // padding-left: $aside-menu-padding-left; // 左侧布局左边距[用于悬浮和选择更明显]
-    background-color: var(--el-menu-bg-color);
-    border-right: none;
-    // box-shadow: $aside-menu-box-shadow; // 左侧布局右边框阴影
-  }
+  width: 100%;
+  height: 100%;
+
   .layout-header {
-    // height: $aside-header-height;
-    background-color: var(--el-header-bg-color);
+    padding: 0;
+  }
+
+  .layout-aside {
+    overflow: hidden;
+    width: var(--sidebar-left-container-default-width, 0px);
+    height: 100%;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+  }
+
+  .layout-main {
+    padding: 0;
+  }
+
+  .layout-container-main {
+    margin-left: var(--sidebar-left-container-default-width, 0px);
   }
 }
 
@@ -68,8 +63,8 @@ useWindowWidthObserver();
 .el-menu {
   border-right: none;
 }
+
 .layout-scrollbar {
   width: 100%;
-  // height: calc(100vh - $aside-header-height);
 }
 </style>

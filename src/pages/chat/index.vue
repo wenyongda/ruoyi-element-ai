@@ -83,7 +83,7 @@ async function handleSend() {
 </script>
 
 <template>
-  <div>
+  <div class="chat-container">
     <BubbleList :list="chatList">
       <template #content="{ item }">
         {{ item.content }}

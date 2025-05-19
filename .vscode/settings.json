@@ -5,6 +5,8 @@
   "prettier.enable": false,
   // 关闭默认格式化
   "editor.formatOnSave": false,
+  // 开启 stylint
+  // "stylelint.enable": true,
 
   // 保存自动修复
   "editor.codeActionsOnSave": {
@@ -15,6 +17,9 @@
     // 使用 stylelint 来修复样式问题
     "source.fixAll.stylelint": "explicit"
   },
+
+  // 开启 stylelint
+  // "stylelint.validate": ["scss", "vue"], // 必须包含"vue"以识别Vue文件中的<style>
 
   // 静默样式规则自动修复
   "eslint.rules.customizations": [
@@ -52,6 +57,5 @@
     "scss",
     "pcss",
     "postcss"
-  ],
-  "cSpell.words": ["aeac", "esno", "radash", "unocss", "unplugin"]
+  ]
 }

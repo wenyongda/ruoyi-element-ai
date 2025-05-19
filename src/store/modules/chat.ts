@@ -1,6 +1,6 @@
 import type { ChatMessageVo } from '@/api/chat/types';
-import { getChatList } from '@/api/chat';
 import { defineStore } from 'pinia';
+import { getChatList } from '@/api/chat';
 import { useUserStore } from './user';
 
 export const useChatStore = defineStore('chat', () => {

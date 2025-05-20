@@ -25,13 +25,13 @@ export function useWindowWidthObserver(
     // 判断当前的折叠状态
     switch (designStore.collapseType) {
       case 'alwaysCollapsed':
-        designStore.setCollapseFinal(true);
+        designStore.setCollapse(true);
         break;
       case 'followSystem':
-        designStore.setCollapseFinal(!isAbove);
+        designStore.setCollapse(!isAbove);
         break;
       case 'alwaysExpanded':
-        designStore.setCollapseFinal(false);
+        designStore.setCollapse(false);
         if (isAbove) {
           // 大于的时候执行关闭动画
           console.log('执行关闭动画');
@@ -42,7 +42,7 @@ export function useWindowWidthObserver(
         }
         break;
       case 'narrowExpandWideCollapse':
-        designStore.setCollapseFinal(isAbove);
+        designStore.setCollapse(isAbove);
     }
     console.log('最终的折叠状态：', designStore.isCollapse);
 

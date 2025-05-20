@@ -16,9 +16,8 @@ useSafeArea({
   direction: 'left',
   size: 50,
   onChange(isInSafeArea) {
-    // console.log('是否移入了安全区', isInSafeArea, isCollapse.value);
     // 设置悬停为 true
-    designStore.isCollapseHover = isInSafeArea;
+    designStore.isSafeAreaHover = isInSafeArea;
   },
   enabled: isCollapse, // 折叠才开启监听
 });
@@ -58,6 +57,7 @@ useWindowWidthObserver();
 
   .layout-container-main {
     margin-left: var(--sidebar-left-container-default-width, 0px);
+    transition: margin-left 0.3s ease;
   }
 }
 

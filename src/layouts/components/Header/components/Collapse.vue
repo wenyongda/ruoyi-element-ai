@@ -10,7 +10,10 @@ const designStore = useDesignStore();
 
 function handleChangeCollapse() {
   changeCollapse();
-  designStore.isCollapseHover = false;
+  // 每次切换折叠状态，重置安全区状态
+  designStore.isSafeAreaHover = false;
+  // 重置首次激活悬停状态
+  designStore.hasActivatedHover = false;
   if (!designStore.isCollapse) {
     document.documentElement.style.setProperty(
       `--sidebar-left-container-default-width`,

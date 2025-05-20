@@ -101,35 +101,17 @@ function handleChange() {
   console.log('点击了会话');
 }
 /* 会话组件 结束 */
-
-/* 鼠标事件 开始 */
-// 添加悬停和移除的类名自己控制
-const isHoverSelf = ref(false);
-function handleChangeMouse(type: string) {
-  if (designStore.isCollapse) {
-    if (type === 'enter') {
-      isHoverSelf.value = !!designStore.isCollapse;
-    }
-    else {
-      isHoverSelf.value = false;
-    }
-  }
-  else {
-    isHoverSelf.value = false;
-  }
-}
-/* 鼠标事件 结束 */
 </script>
 
 <template>
   <div
     class="aside-container"
     :class="{
-      'aside-container-suspended': designStore.isCollapseHover,
+      'aside-container-suspended': designStore.isSafeAreaHover,
       'aside-container-collapse': designStore.isCollapse,
+      // 折叠且未激活悬停时添加 no-delay 类
+      'no-delay': designStore.isCollapse && !designStore.hasActivatedHover,
     }"
-    @mouseenter.stop="handleChangeMouse('enter')"
-    @mouseleave.stop="handleChangeMouse('leave')"
   >
     <div class="aside-wrapper">
       <div v-if="!designStore.isCollapse" class="aside-header">
@@ -301,33 +283,51 @@ function handleChangeMouse(type: string) {
 
   // 指定样式过渡
   transition-property: opacity, transform;
-  transition-duration: 0.2s, 0.2s;
+  transition-duration: 0.3s, 0.3s;
   transition-timing-function: ease, ease;
-  transition-delay: 0.2s, 0s;
-}
+  transition-delay: 0.3s, 0.3s;
 
-// 悬停延迟样式
-.hover-delay {
-  transition-delay: 0.2s;
+  /* 新增：未激活悬停时覆盖延迟 */
+  &.no-delay {
+    transition-delay: 0s, 0s;
+  }
+
+  /* 禁用悬停事件 */
+  pointer-events: none;
+
+  &:hover,
+  &.aside-container-suspended {
+    pointer-events: auto;
+    /* 悬停激活后恢复事件响应 */
+  }
 }
 
 // 悬停样式
-.aside-container-suspended {
-  position: absolute;
+.aside-container-collapse:hover,
+.aside-container-collapse.aside-container-suspended {
+  // 直接在这里写悬停时的样式（与 aside-container-suspended 一致）
   opacity: 1;
   transform: translateX(15px);
-  top: 54px;
   border-radius: 15px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow:
     0px 10px 20px 0px rgba(0, 0, 0, 0.1),
     0px 0px 1px 0px rgba(0, 0, 0, 0.15);
   height: auto;
-  z-index: 22;
   overflow: hidden;
   max-height: calc(100% - 110px);
   padding-bottom: 12px;
-  transition: all 0.3s ease;
+
+  // 过渡动画沿用原有设置
+  transition-property: opacity, transform;
+  transition-duration: 0.3s, 0.3s;
+  transition-timing-function: ease, ease;
+  transition-delay: 0s, 0s;
+
+  // 会话列表高度-悬停样式
+  .conversations-wrap {
+    height: calc(100vh - 155px) !important;
+  }
 }
 
 // 样式穿透

@@ -11,7 +11,8 @@ const {
   layout: reLayout,
   collapseType: reCollapseType,
   isCollapse: reisCollapse,
-  isCollapseHover: reisCollapseHover,
+  isSafeAreaHover: reisSafeAreaHover,
+  hasActivatedHover: rehasActivatedHover,
 } = designSetting;
 
 export const useDesignStore = defineStore(
@@ -44,16 +45,38 @@ export const useDesignStore = defineStore(
     // 最终是否展开左侧菜单
     const isCollapse = ref<boolean>(reisCollapse);
 
-    const setCollapseFinal = (collapseFinal: boolean) => {
+    const setCollapse = (collapseFinal: boolean) => {
       isCollapse.value = collapseFinal;
     };
 
     // 折叠按钮是否被悬停
-    const isCollapseHover = ref<boolean>(reisCollapseHover);
+    const isSafeAreaHover = ref<boolean>(reisSafeAreaHover);
 
-    const setCollapseHover = (hover: boolean) => {
-      isCollapseHover.value = hover;
+    const setSafeAreaHover = (hover: boolean) => {
+      isSafeAreaHover.value = hover;
     };
+
+    // 跟踪是否首次激活悬停
+    const hasActivatedHover = ref<boolean>(rehasActivatedHover);
+
+    // 两个监听不要合并
+    watch(
+      () => isCollapse.value,
+      (newValue) => {
+        if (newValue) {
+          hasActivatedHover.value = false;
+        }
+      },
+      { deep: true },
+    );
+
+    watch(
+      () => isSafeAreaHover.value,
+      () => {
+        hasActivatedHover.value = true;
+      },
+      { deep: true },
+    );
 
     return {
       darkMode,
@@ -67,9 +90,10 @@ export const useDesignStore = defineStore(
       collapseType,
       setCollapseType,
       isCollapse,
-      setCollapseFinal,
-      isCollapseHover,
-      setCollapseHover,
+      setCollapse,
+      isSafeAreaHover,
+      setSafeAreaHover,
+      hasActivatedHover,
     };
   },
   {

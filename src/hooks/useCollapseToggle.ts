@@ -14,7 +14,7 @@ export function useCollapseToggle(threshold: number = COLLAPSE_THRESHOLD) {
   /** 核心折叠切换方法 */
   const changeCollapse = () => {
     // 切换最终折叠状态
-    designStore.setCollapseFinal(!designStore.isCollapse);
+    designStore.setCollapse(!designStore.isCollapse);
 
     if (isAboveThreshold.value) {
       // 宽屏逻辑

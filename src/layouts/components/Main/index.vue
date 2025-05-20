@@ -1,6 +1,6 @@
 <!-- Main -->
 <script setup lang="ts">
-import { useDesignStore } from '@/store/modules/design';
+import { useDesignStore } from '@/store';
 import { useKeepAliveStore } from '@/store/modules/keepAlive';
 
 const designStore = useDesignStore();

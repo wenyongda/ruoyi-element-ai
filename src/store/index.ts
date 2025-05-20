@@ -7,4 +7,5 @@ store.use(piniaPluginPersistedstate);
 
 export default store;
 
+export * from './modules/design';
 export * from './modules/user';

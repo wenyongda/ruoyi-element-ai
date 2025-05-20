@@ -30,24 +30,34 @@ function handleClickTitle() {
 </script>
 
 <template>
-  <div
-    class="title-editing-container hover:bg-[rgba(0,0,0,.04)] cursor-pointer rounded-md p-4px flex items-center"
-    @click="handleClickTitle"
-  >
-    <span class="font-size-14px text-overflow max-w-320px">标题编辑标题编辑标题编辑标题编辑标题编辑标题编辑标题编辑标题编辑</span>
-    <SvgIcon name="draft-line" size="14" />
+  <div class="w-full h-full flex flex-col justify-center">
+    <div class="box-border mr-20px">
+      <div
+        class="title-editing-container p-4px w-fit max-w-full flex items-center justify-start cursor-pointer select-none hover:bg-[rgba(0,0,0,.04)] cursor-pointer rounded-md font-size-14px"
+        @click="handleClickTitle"
+      >
+        <div class="text-overflow select-none pr-8px">
+          标题编辑标题编辑标题编辑标题编辑标题编辑标题编辑标题编辑标题编辑
+        </div>
+        <SvgIcon name="draft-line" size="14" class="flex-none c-gray-500" />
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 .title-editing-container {
+  transition: all 0.3s ease;
   &:hover {
     .svg-icon {
+      opacity: 1;
       display: block;
     }
   }
 
   .svg-icon {
+    transition: all 0.3s ease;
+    opacity: 0.5;
     display: none;
   }
 }

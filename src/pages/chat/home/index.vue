@@ -30,7 +30,7 @@ function handleSend() {
         @submit="handleSend"
       >
         <template #prefix>
-          <div class="flex items-center gap-8px">
+          <div class="flex-1 flex items-center gap-8px flex-none w-fit overflow-hidden">
             <div
               class="flex items-center gap-4px px-12px py-8px rounded-15px cursor-pointer font-size-12px border-1px border-gray border-solid hover:bg-[rgba(0,0,0,.04)]"
             >
@@ -58,7 +58,8 @@ function handleSend() {
 
 <style scoped lang="scss">
 .chat-home-container {
-  width: 100%;
+  padding: 0 16px;
+  width: calc(100% - 32px);
   display: flex;
   position: relative;
   flex-direction: column;

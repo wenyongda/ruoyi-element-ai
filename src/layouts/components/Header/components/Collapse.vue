@@ -3,13 +3,14 @@
 import SvgIcon from '@/components/SvgIcon/index.vue';
 import { SIDE_BAR_WIDTH } from '@/config/index';
 import { useCollapseToggle } from '@/hooks/useCollapseToggle';
-import { useDesignStore } from '@/store/modules/design';
+import { useDesignStore } from '@/store';
 
 const { changeCollapse } = useCollapseToggle();
 const designStore = useDesignStore();
 
 function handleChangeCollapse() {
   changeCollapse();
+  designStore.isCollapseHover = false;
   if (!designStore.isCollapse) {
     document.documentElement.style.setProperty(
       `--sidebar-left-container-default-width`,

@@ -11,6 +11,7 @@ const {
   layout: reLayout,
   collapseType: reCollapseType,
   isCollapse: reisCollapse,
+  isCollapseHover: reisCollapseHover,
 } = designSetting;
 
 export const useDesignStore = defineStore(
@@ -47,6 +48,13 @@ export const useDesignStore = defineStore(
       isCollapse.value = collapseFinal;
     };
 
+    // 折叠按钮是否被悬停
+    const isCollapseHover = ref<boolean>(reisCollapseHover);
+
+    const setCollapseHover = (hover: boolean) => {
+      isCollapseHover.value = hover;
+    };
+
     return {
       darkMode,
       setDarkMode,
@@ -60,6 +68,8 @@ export const useDesignStore = defineStore(
       setCollapseType,
       isCollapse,
       setCollapseFinal,
+      isCollapseHover,
+      setCollapseHover,
     };
   },
   {

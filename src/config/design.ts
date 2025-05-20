@@ -24,6 +24,8 @@ export interface DesignConfigState {
   collapseType: CollapseType;
   // 是否折叠菜单
   isCollapse: boolean;
+  // 头部折叠按钮是否被悬停
+  isCollapseHover: boolean;
 }
 
 export const themeColorList: string[] = [
@@ -65,6 +67,8 @@ const design: DesignConfigState = {
   collapseType: 'followSystem',
   // 是否折叠菜单
   isCollapse: false,
+  // 头部折叠按钮是否被悬停
+  isCollapseHover: false,
 };
 
 export default design;

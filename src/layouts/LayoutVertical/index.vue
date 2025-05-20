@@ -1,14 +1,27 @@
 <!-- 纵向布局作为基础布局 -->
 <script setup lang="ts">
+import { useSafeArea } from '@/hooks/useSafeArea';
 import { useWindowWidthObserver } from '@/hooks/useWindowWidthObserver';
 import Aside from '@/layouts/components/Aside/index.vue';
 import Header from '@/layouts/components/Header/index.vue';
 import Main from '@/layouts/components/Main/index.vue';
-import { useDesignStore } from '@/store/modules/design';
+import { useDesignStore } from '@/store';
 
 const designStore = useDesignStore();
 
-console.log('每次加载全局的折叠状态', designStore.collapseType);
+const isCollapse = computed(() => designStore.isCollapse);
+
+/* 是否移入了安全区 */
+useSafeArea({
+  direction: 'left',
+  size: 50,
+  onChange(isInSafeArea) {
+    // console.log('是否移入了安全区', isInSafeArea, isCollapse.value);
+    // 设置悬停为 true
+    designStore.isCollapseHover = isInSafeArea;
+  },
+  enabled: isCollapse, // 折叠才开启监听
+});
 
 /** 监听窗口大小变化，折叠侧边栏 */
 useWindowWidthObserver();
@@ -20,9 +33,7 @@ useWindowWidthObserver();
       <Header />
     </el-header>
     <el-container class="layout-container-main">
-      <Transition :class="designStore.pageAnimateType">
-        <Aside v-if="!designStore.isCollapse" class="layout-aside transition-all" />
-      </Transition>
+      <Aside />
       <el-main class="layout-main">
         <!-- 路由页面 -->
         <Main />
@@ -35,19 +46,10 @@ useWindowWidthObserver();
 .layout-container {
   width: 100%;
   height: 100%;
+  position: relative;
 
   .layout-header {
     padding: 0;
-  }
-
-  .layout-aside {
-    overflow: hidden;
-    width: var(--sidebar-left-container-default-width, 0px);
-    height: 100%;
-    position: absolute;
-    z-index: 10;
-    top: 0;
-    left: 0;
   }
 
   .layout-main {

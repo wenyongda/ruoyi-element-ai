@@ -1,7 +1,7 @@
 import type { MaybeRef } from 'vue';
 import { onBeforeUnmount, ref, unref, watch } from 'vue';
 import { COLLAPSE_THRESHOLD, SIDE_BAR_WIDTH } from '@/config/index';
-import { useDesignStore } from '@/store/modules/design';
+import { useDesignStore } from '@/store';
 
 /**
  * 这里逻辑是研究豆包的折叠逻辑后，设计的折叠方法
@@ -29,7 +29,6 @@ export function useWindowWidthObserver(
         break;
       case 'followSystem':
         designStore.setCollapseFinal(!isAbove);
-        designStore.setCollapseFinal(!isAbove);
         break;
       case 'alwaysExpanded':
         designStore.setCollapseFinal(false);
@@ -43,7 +42,6 @@ export function useWindowWidthObserver(
         }
         break;
       case 'narrowExpandWideCollapse':
-        designStore.setCollapseFinal(isAbove);
         designStore.setCollapseFinal(isAbove);
     }
     console.log('最终的折叠状态：', designStore.isCollapse);

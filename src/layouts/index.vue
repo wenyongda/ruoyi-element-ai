@@ -3,7 +3,7 @@
 import type { LayoutType } from '@/config/design';
 // import { useScreenStore } from '@/hooks/useScreen';
 import LayoutVertical from '@/layouts/LayoutVertical/index.vue';
-import { useDesignStore } from '@/store/modules/design';
+import { useDesignStore } from '@/store';
 
 // 这里添加布局类型
 const LayoutComponent: Record<LayoutType, Component> = {

@@ -1,19 +1,24 @@
 <script setup lang="ts">
-import { BubbleList, Sender } from 'vue-element-plus-x';
+import { Sender } from 'vue-element-plus-x';
 import { useRoute, useRouter } from 'vue-router';
 import { createSession } from '@/api';
 import { send } from '@/api/chat';
+import LoginDialog from '@/components/LoginDialog/index.vue';
+import WelecomeText from '@/components/WelecomeText/index.vue';
 import { ModelEnum } from '@/constants/enums';
 import { useUserStore } from '@/store';
 import { useChatStore } from '@/store/modules/chat';
 
 const route = useRoute();
 const router = useRouter();
-const chatId = computed(() => Number(route.params?.id));
-const senderValue = ref('');
 const userStore = useUserStore();
 const chatStore = useChatStore();
-const chatList = computed(() => chatStore.chatMap[chatId.value] ?? []);
+
+const senderValue = ref('');
+const isSelect = ref(false);
+const isLoginDialogVisible = ref(false);
+
+const chatId = computed(() => Number(route.params?.id));
 if (chatId.value) {
   chatStore.requestChatList(chatId.value);
 }
@@ -83,12 +88,76 @@ async function handleSend() {
 </script>
 
 <template>
-  <div class="chat-container">
-    <BubbleList :list="chatList">
-      <template #content="{ item }">
-        {{ item.content }}
-      </template>
-    </BubbleList>
-    <Sender v-model="senderValue" :loading="loading" @submit="handleSend" />
+  <div class="chat-home-container">
+    <div class="chat-home-wrap">
+      <WelecomeText />
+      <Sender
+        v-model="senderValue"
+        class="chat-home-sender"
+        :auto-size="{
+          maxRows: 9,
+          minRows: 3,
+        }"
+        :loading="loading"
+        variant="updown"
+        clearable
+        allow-speech
+        @submit="handleSend"
+      >
+        <template #prefix>
+          <div class="flex-1 flex items-center gap-8px flex-none w-fit overflow-hidden">
+            <div
+              class="flex items-center gap-4px px-12px py-8px rounded-15px cursor-pointer font-size-12px border-1px border-gray border-solid hover:bg-[rgba(0,0,0,.04)]"
+            >
+              <el-icon>
+                <Paperclip />
+              </el-icon>
+            </div>
+
+            <div
+              :class="{ isSelect }"
+              class="flex items-center gap-4px px-10px py-8px rounded-15px cursor-pointer font-size-12px border-1px border-gray border-solid hover:bg-[rgba(0,0,0,.04)]"
+              @click="isSelect = !isSelect"
+            >
+              <el-icon>
+                <ElementPlus />
+              </el-icon>
+              <span>深度思考</span>
+            </div>
+          </div>
+        </template>
+      </Sender>
+    </div>
+
+    <!-- 登录弹框 -->
+    <LoginDialog v-model:visible="isLoginDialogVisible" />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.chat-home-container {
+  padding: 0 16px;
+  width: calc(100% - 32px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  overflow-anchor: none;
+
+  .chat-home-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    min-height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .chat-home-sender {
+      width: 100%;
+    }
+  }
+}
+</style>

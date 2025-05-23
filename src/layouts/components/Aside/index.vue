@@ -1,11 +1,18 @@
 <!-- Aside 侧边栏 -->
 <script setup lang="ts">
 import type { GroupableOptions } from 'vue-element-plus-x/types/Conversations';
+import { useRoute } from 'vue-router';
 import logo from '@/assets/images/logo.png';
 import Collapse from '@/layouts/components/Header/components/Collapse.vue';
 import { useDesignStore } from '@/store';
+import { useChatStore } from '@/store/modules/chat';
 
+const route = useRoute();
+const chatStore = useChatStore();
 const designStore = useDesignStore();
+
+const chatId = computed(() => Number(route.params?.id));
+const conversationsList = computed(() => chatStore.chatMap[chatId.value] ?? []);
 
 /* 创建会话 开始 */
 function handleCreatChat() {
@@ -15,76 +22,6 @@ function handleCreatChat() {
 
 /* 会话组件 开始 */
 const active = ref('m1');
-const conversationsList = ref([
-  {
-    key: 'm1',
-    label: '菜单测试项目 1',
-    group: '工作',
-  },
-  {
-    key: 'm2',
-    label: '菜单测试项目 2',
-    disabled: true,
-    group: '工作',
-  },
-  {
-    key: 'm3',
-    label: '菜单测试项目 3',
-    group: '工作',
-  },
-  {
-    key: 'm4',
-    label: '菜单测试项目 4',
-    group: '学习',
-  },
-  {
-    key: 'm5',
-    label: '菜单测试项目 5',
-    group: '学习',
-  },
-  {
-    key: 'm6',
-    label: '菜单测试项目 6',
-    group: '学习',
-  },
-  {
-    key: 'm7',
-    label: '菜单测试项目 7',
-    group: '学习',
-  },
-  {
-    key: 'm8',
-    label: '菜单测试项目 8',
-    group: '个人',
-  },
-  {
-    key: 'm9',
-    label: '菜单测试项目 9',
-    group: '个人',
-  },
-  {
-    key: 'm10',
-    label: '菜单测试项目 10',
-    group: '个人',
-  },
-  {
-    key: 'm11',
-    label: '菜单测试项目 11',
-    group: '个人',
-  },
-  {
-    key: 'm12',
-    label: '菜单测试项目 12',
-  },
-  {
-    key: 'm13',
-    label: '菜单测试项目 13',
-  },
-  {
-    key: 'm14',
-    label: '菜单测试项目 14',
-  },
-]);
 
 // 自定义分组选项
 const customGroupOptions: GroupableOptions = {

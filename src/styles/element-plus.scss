@@ -5,3 +5,9 @@
     }
   }
 }
+
+// el 弹框不知道为啥宽度会变大
+.el-popup-parent--hidden {
+  overflow: hidden;
+  width: 100% !important;
+}

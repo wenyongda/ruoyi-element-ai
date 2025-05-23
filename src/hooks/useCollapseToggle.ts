@@ -51,7 +51,7 @@ export function useCollapseToggle(threshold: number = COLLAPSE_THRESHOLD) {
 
 // 使用示例与特性说明
 // <script setup lang="ts">
-// import { useCollapseToggle } from '@/composables/useCollapseToggle';
+// import { useCollapseToggle } from '@/hooks/useCollapseToggle';
 // import { COLLAPSE_THRESHOLD } from '@/config/index'; (可传，不传入全局配置走)
 // const { changeCollapseIcon } = useCollapseToggle(designStore, COLLAPSE_THRESHOLD);
 // </script>

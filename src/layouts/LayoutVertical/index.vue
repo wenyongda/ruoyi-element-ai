@@ -44,8 +44,9 @@ useWindowWidthObserver();
 <style lang="scss" scoped>
 .layout-container {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: relative;
+  overflow: hidden;
 
   .layout-header {
     padding: 0;
@@ -53,6 +54,7 @@ useWindowWidthObserver();
 
   .layout-main {
     padding: 0;
+    height: 100%;
   }
 
   .layout-container-main {

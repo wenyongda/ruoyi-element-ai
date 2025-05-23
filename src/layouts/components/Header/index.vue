@@ -54,10 +54,10 @@ onMounted(() => {
 
         <!-- 右边 -->
         <div class="right-box flex h-full items-center pr-20px flex-shrink-0 mr-auto flex-row">
-          <!-- <Avatar v-if="userStore.token" /> -->
-          <!-- <LoginBtn v-else /> -->
-          <Avatar />
-          <LoginBtn />
+          <Avatar v-if="userStore.token" />
+          <LoginBtn v-else />
+          <!-- <Avatar />
+          <LoginBtn /> -->
         </div>
       </div>
     </div>

@@ -76,8 +76,9 @@ export function useSafeArea(options: SafeAreaOptions): { isInSafeArea: Ref<boole
 
 // 使用示例
 // 外部组件中
-// const isListening = ref(false); // 响应式开关
+// import { useSafeArea } from '@/hooks/useSafeArea';
 
+// const isListening = ref(false); // 响应式开关
 // const { isInSafeArea } = useSafeArea({
 //   direction: 'left',
 //   size: 50,

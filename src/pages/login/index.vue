@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { LoginDTO } from '@/api/auth/types';
 import type { FormInstance } from 'element-plus';
-import { login } from '@/api';
-import { useUserStore } from '@/store';
+import type { LoginDTO } from '@/api/auth/types';
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { login } from '@/api';
+import { useUserStore } from '@/store';
 
 const userStore = useUserStore();
 

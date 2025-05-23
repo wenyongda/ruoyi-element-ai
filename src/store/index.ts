@@ -7,5 +7,6 @@ store.use(piniaPluginPersistedstate);
 
 export default store;
 
+// export * from './modules/chat';
 export * from './modules/design';
 export * from './modules/user';

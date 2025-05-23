@@ -5,23 +5,18 @@ import { jwtGuard } from './permissions';
 const routes: Readonly<RouteRecordRaw>[] = [
   {
     path: '/',
-    redirect: '/chat',
+    redirect: 'chat',
     component: () => import('@/layouts/index.vue'),
     children: [
       {
-        path: '',
+        path: '/chat',
+        name: 'chat',
+        component: () => import('@/pages/chat/index.vue'),
+      },
+      {
+        path: '/chat:id',
         name: 'chatWithoutId',
         component: () => import('@/pages/chat/index.vue'),
-      },
-      {
-        path: ':id',
-        name: '/chat',
-        component: () => import('@/pages/chat/index.vue'),
-      },
-      {
-        path: '/chat/home',
-        name: 'chatHome',
-        component: () => import('@/pages/chat/home/index.vue'),
       },
     ],
   },

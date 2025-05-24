@@ -3,7 +3,6 @@ import { Sender } from 'vue-element-plus-x';
 import { useRoute, useRouter } from 'vue-router';
 import { createSession } from '@/api';
 import { send } from '@/api/chat';
-import LoginDialog from '@/components/LoginDialog/index.vue';
 import WelecomeText from '@/components/WelecomeText/index.vue';
 import { ModelEnum } from '@/constants/enums';
 import { useUserStore } from '@/store';
@@ -16,7 +15,6 @@ const chatStore = useChatStore();
 
 const senderValue = ref('');
 const isSelect = ref(false);
-const isLoginDialogVisible = ref(false);
 
 const chatId = computed(() => Number(route.params?.id));
 if (chatId.value) {
@@ -128,9 +126,6 @@ async function handleSend() {
         </template>
       </Sender>
     </div>
-
-    <!-- 登录弹框 -->
-    <LoginDialog v-model:visible="isLoginDialogVisible" />
   </div>
 </template>
 

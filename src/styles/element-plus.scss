@@ -11,3 +11,11 @@
   overflow: hidden;
   width: 100% !important;
 }
+
+
+// messagebox 样式
+.is-message-box {
+  .el-message-box { 
+    border-radius: 16px;
+  }
+}

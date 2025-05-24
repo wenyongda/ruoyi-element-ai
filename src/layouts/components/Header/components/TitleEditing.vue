@@ -7,6 +7,9 @@ function handleClickTitle() {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     inputErrorMessage: '请输入对话名称',
+    confirmButtonClass: 'el-button--primary',
+    cancelButtonClass: 'el-button--info',
+    roundButton: true,
     inputValidator: (value) => {
       if (!value) {
         return false;

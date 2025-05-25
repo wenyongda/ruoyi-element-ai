@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue';
 import logoPng from '@/assets/images/logo.png';
 import SvgIcon from '@/components/SvgIcon/index.vue';
-import { useUserStore } from '@/store';
+import { useUserStore } from '@/stores';
 import AccountPassword from './components/FormLogin/AccountPassword.vue';
 import QrCodeLogin from './components/QrCodeLogin/index.vue';
 

@@ -2,7 +2,7 @@ import type { HookFetchPlugin } from 'hook-fetch';
 import { ElMessage } from 'element-plus';
 import hookFetch from 'hook-fetch';
 import { sseTextDecoderPlugin } from 'hook-fetch/plugins';
-import { useUserStore } from '@/store';
+import { useUserStore } from '@/stores';
 
 interface BaseResponse {
   code: number;
@@ -34,8 +34,9 @@ function jwtPlugin(): HookFetchPlugin<BaseResponse> {
         return response;
       }
       if (response.result?.code === 401) {
-        // 如果没有权限，也不退出，则是弹框提示登录
+        // 如果没有权限，退出，且弹框提示登录
         userStore.logout();
+        userStore.openLoginDialog();
       }
       ElMessage.error(response.result?.msg);
       return Promise.reject(response);

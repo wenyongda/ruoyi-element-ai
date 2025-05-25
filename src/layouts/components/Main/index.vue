@@ -1,7 +1,7 @@
 <!-- Main -->
 <script setup lang="ts">
-import { useDesignStore } from '@/store';
-import { useKeepAliveStore } from '@/store/modules/keepAlive';
+import { useDesignStore } from '@/stores';
+import { useKeepAliveStore } from '@/stores/modules/keepAlive';
 
 const designStore = useDesignStore();
 const keepAliveStore = useKeepAliveStore();
@@ -16,7 +16,7 @@ provide('refresh', refreshMainPage);
   <el-main class="layout-main">
     <router-view v-slot="{ Component, route }">
       <transition :name="designStore.pageAnimateType" mode="out-in" appear>
-        <keep-alive :max="16" :include="keepAliveStore.keepAliveName">
+        <keep-alive :max="10" :include="keepAliveStore.keepAliveName">
           <component :is="Component" v-if="isRouterShow" :key="route.fullPath" />
         </keep-alive>
       </transition>

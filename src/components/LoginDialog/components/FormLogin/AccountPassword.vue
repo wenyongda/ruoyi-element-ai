@@ -5,7 +5,7 @@ import type { LoginDTO } from '@/api/auth/types';
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { login } from '@/api';
-import { useUserStore } from '@/store';
+import { useUserStore } from '@/stores';
 
 const userStore = useUserStore();
 
@@ -29,7 +29,9 @@ async function handleSubmit() {
     console.log(res, 'res');
     res.data.token && userStore.setToken(res.data.token);
     res.data.userInfo && userStore.setUserInfo(res.data.userInfo);
+    ElMessage.success('登录成功');
     router.replace('/');
+    userStore.closeLoginDialog();
   }
   catch (error) {
     console.error('请求错误:', error);
@@ -39,7 +41,7 @@ async function handleSubmit() {
 
 <template>
   <div class="custom-form">
-    <el-form ref="formRef" :model="formModel" :rules="rules">
+    <el-form ref="formRef" :model="formModel" :rules="rules" style="width: 230px">
       <el-form-item prop="username">
         <el-input v-model="formModel.username" placeholder="请输入用户名" clearable>
           <template #prefix>

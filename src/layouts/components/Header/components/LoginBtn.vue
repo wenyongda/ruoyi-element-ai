@@ -1,10 +1,9 @@
 <!-- LoginBtn 登录按钮 -->
 <script setup lang="ts">
 import LoginDialog from '@/components/LoginDialog/index.vue';
-import { useUserStore } from '@/store';
+import { useUserStore } from '@/stores';
 
 const userStore = useUserStore();
-
 const isLoginDialogVisible = computed(() => userStore.isLoginDialogVisible);
 
 // 点击登录按钮时调用Store方法打开弹框

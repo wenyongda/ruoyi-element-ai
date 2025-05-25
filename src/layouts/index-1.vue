@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { ConversationItem } from 'vue-element-plus-x/types/Conversations';
 import type { ChatSessionVo } from '@/api/session/types';
-// import { useUserStore } from '@/store';
+// import { useUserStore } from '@/stores';
 import { Conversations } from 'vue-element-plus-x';
 import { useRoute, useRouter } from 'vue-router';
 // import { getSessionList } from '@/api';
@@ -43,13 +43,13 @@ function handleChange(item: ConversationItem<ChatSessionVo>) {
 const sessionId = computed<string>(() => route.params?.id as string);
 function handleNewSession() {
   if (sessionId.value) {
-    router.replace({ name: 'chatWithoutId' });
+    router.replace({ name: 'chatWithId' });
   }
 }
 
-watchEffect(() => {
-  console.log('active', active.value, '>>>');
-});
+// watchEffect(() => {
+//   console.log('active', active.value, '>>>');
+// });
 </script>
 
 <template>

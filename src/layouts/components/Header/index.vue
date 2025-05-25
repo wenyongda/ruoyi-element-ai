@@ -1,7 +1,7 @@
 <!-- Header 头部 -->
 <script setup lang="ts">
 import { SIDE_BAR_WIDTH } from '@/config/index';
-import { useDesignStore, useUserStore } from '@/store';
+import { useDesignStore, useUserStore } from '@/stores';
 import Avatar from './components/Avatar.vue';
 import Collapse from './components/Collapse.vue';
 import CreateChat from './components/CreateChat.vue';
@@ -54,10 +54,8 @@ onMounted(() => {
 
         <!-- 右边 -->
         <div class="right-box flex h-full items-center pr-20px flex-shrink-0 mr-auto flex-row">
-          <Avatar v-if="userStore.token" />
-          <LoginBtn v-else />
-          <!-- <Avatar />
-          <LoginBtn /> -->
+          <Avatar v-show="userStore.token" />
+          <LoginBtn v-show="!userStore.token" />
         </div>
       </div>
     </div>

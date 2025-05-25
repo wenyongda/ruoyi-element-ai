@@ -3,7 +3,7 @@
 import SvgIcon from '@/components/SvgIcon/index.vue';
 import { SIDE_BAR_WIDTH } from '@/config/index';
 import { useCollapseToggle } from '@/hooks/useCollapseToggle';
-import { useDesignStore } from '@/store';
+import { useDesignStore } from '@/stores';
 
 const { changeCollapse } = useCollapseToggle();
 const designStore = useDesignStore();

@@ -1,27 +1,31 @@
 <!-- Aside 侧边栏 -->
 <script setup lang="ts">
-import type { GroupableOptions } from 'vue-element-plus-x/types/Conversations';
-import { useRoute } from 'vue-router';
+import type { ConversationItem, GroupableOptions } from 'vue-element-plus-x/types/Conversations';
+import type { ChatSessionVo } from '@/api/session/types';
+import { useRoute, useRouter } from 'vue-router';
 import logo from '@/assets/images/logo.png';
 import Collapse from '@/layouts/components/Header/components/Collapse.vue';
-import { useDesignStore } from '@/store';
-import { useChatStore } from '@/store/modules/chat';
+import { useDesignStore } from '@/stores';
+import { useSessionStore } from '@/stores/modules/session';
 
 const route = useRoute();
-const chatStore = useChatStore();
+const router = useRouter();
 const designStore = useDesignStore();
+const sessionStore = useSessionStore();
 
-const chatId = computed(() => Number(route.params?.id));
-const conversationsList = computed(() => chatStore.chatMap[chatId.value] ?? []);
+// const sessionId = computed(() => Number(route.params?.id));
+const conversationsList = computed(() => sessionStore.sessionList);
 
 /* 创建会话 开始 */
 function handleCreatChat() {
   console.log('创建新会话');
+  // 创建会话, 跳转到默认聊天
+  sessionStore.createSessionBtn();
 }
 /* 创建会话 结束 */
 
 /* 会话组件 开始 */
-const active = ref('m1');
+const active = computed<string>(() => (route.params?.id as string) ?? '');
 
 // 自定义分组选项
 const customGroupOptions: GroupableOptions = {
@@ -34,10 +38,20 @@ const customGroupOptions: GroupableOptions = {
   },
 };
 
-function handleChange() {
-  console.log('点击了会话');
+function handleChange(item: ConversationItem<ChatSessionVo>) {
+  console.log('点击了会话 item', item);
+  router.replace({
+    name: 'chatWithId',
+    params: {
+      id: item.id,
+    },
+  });
 }
 /* 会话组件 结束 */
+
+watchEffect(() => {
+  console.log('active', active.value, '>>>');
+});
 </script>
 
 <template>

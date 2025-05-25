@@ -1,6 +1,6 @@
 import { COLLAPSE_THRESHOLD } from '@/config/index';
 import { useWindowWidthObserver } from '@/hooks/useWindowWidthObserver';
-import { useDesignStore } from '@/store';
+import { useDesignStore } from '@/stores';
 
 /**
  * 侧边栏折叠切换逻辑组合式函数 方便多个页面调用

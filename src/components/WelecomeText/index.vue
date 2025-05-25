@@ -1,7 +1,7 @@
 <!-- 欢迎提示词 -->
 <script setup lang="ts">
 import { useTimeGreeting } from '@/hooks/useTimeGreeting';
-import { useUserStore } from '@/store';
+import { useUserStore } from '@/stores';
 
 const greeting = useTimeGreeting();
 const userStore = useUserStore();

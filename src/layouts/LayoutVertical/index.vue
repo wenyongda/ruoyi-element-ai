@@ -5,7 +5,7 @@ import { useWindowWidthObserver } from '@/hooks/useWindowWidthObserver';
 import Aside from '@/layouts/components/Aside/index.vue';
 import Header from '@/layouts/components/Header/index.vue';
 import Main from '@/layouts/components/Main/index.vue';
-import { useDesignStore } from '@/store';
+import { useDesignStore } from '@/stores';
 
 const designStore = useDesignStore();
 

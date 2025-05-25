@@ -16,4 +16,9 @@
   --login-dialog-logo-background: #fff;
   --login-dialog-logo-text-color: #191919;
 
+
+
+  /* 覆盖 element-plus 样式 */
+  --el-border-radius-base: 12px;
+  --el-messagebox-border-radius: 16px;
 }

@@ -137,6 +137,6 @@ export interface CreateSessionDTO {
   userId: number;
 }
 
-export interface CreateSessionVO {
-  id: number;
-}
+// export interface CreateSessionVO {
+//   id: number;
+// }

@@ -2,8 +2,12 @@
 <script setup lang="ts">
 import Popover from '@/components/Popover/index.vue';
 import SvgIcon from '@/components/SvgIcon/index.vue';
+import { useUserStore } from '@/stores';
 
-const src = ref('https://avatars.githubusercontent.com/u/76239030');
+const userStore = useUserStore();
+const src = computed(
+  () => userStore.userInfo?.avatar ?? 'https://avatars.githubusercontent.com/u/76239030',
+);
 
 /* 弹出面板 开始 */
 const popoverStyle = ref({
@@ -40,9 +44,11 @@ const popoverList = ref([
 function handleClick(item: any) {
   switch (item.key) {
     case '1':
+      ElMessage.warning('暂未开放');
       console.log('点击了收藏夹');
       break;
     case '2':
+      ElMessage.warning('暂未开放');
       console.log('点击了设置');
       break;
     case '4':
@@ -57,7 +63,7 @@ function handleClick(item: any) {
       })
         .then(() => {
           // 在这里执行退出方法
-
+          userStore.logout();
           ElMessage({
             type: 'success',
             message: '退出成功',

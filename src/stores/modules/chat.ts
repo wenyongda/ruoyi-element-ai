@@ -5,6 +5,7 @@ import { useUserStore } from './user';
 
 export const useChatStore = defineStore('chat', () => {
   const userStore = useUserStore();
+
   const chatMap = ref<Record<number, ChatMessageVo[]>>({});
 
   const setChatMap = (id: number, data: ChatMessageVo[]) => {
@@ -26,8 +27,17 @@ export const useChatStore = defineStore('chat', () => {
     }
   };
 
+  // 是否开启深度思考
+  const isDeepThinking = ref<boolean>(false);
+
+  const setDeepThinking = (value: boolean) => {
+    isDeepThinking.value = value;
+  };
+
   return {
     chatMap,
     requestChatList,
+    isDeepThinking,
+    setDeepThinking,
   };
 });

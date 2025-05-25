@@ -25,8 +25,21 @@ export const useUserStore = defineStore(
     const logout = async () => {
       // 如果需要调用接口，可以在这里调用
       clearToken();
-      router.replace({ name: 'login' });
       clearUserInfo();
+      router.replace({ name: 'chat' });
+    };
+
+    // 新增：登录弹框状态
+    const isLoginDialogVisible = ref(false);
+
+    // 新增：打开弹框方法
+    const openLoginDialog = () => {
+      isLoginDialogVisible.value = true;
+    };
+
+    // 新增：关闭弹框方法（可根据需求扩展）
+    const closeLoginDialog = () => {
+      isLoginDialogVisible.value = false;
     };
 
     return {
@@ -37,6 +50,10 @@ export const useUserStore = defineStore(
       setUserInfo,
       clearUserInfo,
       logout,
+      // 新增：暴露弹框状态和方法
+      isLoginDialogVisible,
+      openLoginDialog,
+      closeLoginDialog,
     };
   },
   {

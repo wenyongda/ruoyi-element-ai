@@ -2,8 +2,11 @@
 import { ref, watch } from 'vue';
 import logoPng from '@/assets/images/logo.png';
 import SvgIcon from '@/components/SvgIcon/index.vue';
+import { useUserStore } from '@/store';
 import AccountPassword from './components/FormLogin/AccountPassword.vue';
 import QrCodeLogin from './components/QrCodeLogin/index.vue';
+
+const userStore = useUserStore();
 
 // 使用 defineModel 定义双向绑定的 visible（需 Vue 3.4+）
 const visible = defineModel<boolean>('visible');
@@ -31,7 +34,8 @@ function toggleLoginMode() {
 
 // 点击遮罩层关闭对话框（触发过渡动画）
 function handleMaskClick() {
-  visible.value = false; // 触发离开动画
+  // 触发离开动画
+  userStore.closeLoginDialog();
 }
 
 // 过渡动画结束回调

@@ -4,7 +4,7 @@ import type { ChatSessionVo } from '@/api/session/types';
 // import { useUserStore } from '@/stores';
 import { Conversations } from 'vue-element-plus-x';
 import { useRoute, useRouter } from 'vue-router';
-// import { getSessionList } from '@/api';
+// import { get_session_list } from '@/api';
 
 const route = useRoute();
 const router = useRouter();
@@ -14,17 +14,17 @@ const items = ref<ConversationItem<ChatSessionVo>[]>([]);
 
 function handleChange(item: ConversationItem<ChatSessionVo>) {
   console.log(item);
-  router.replace({
-    name: 'chat',
-    params: {
-      id: item.id,
-    },
-  });
+  // router.replace({
+  //   name: 'chat',
+  //   params: {
+  //     id: item.id,
+  //   },
+  // });
 }
 
 // async function getSessions() {
 //   try {
-//     const res = await getSessionList({
+//     const res = await get_session_list({
 //       userId: userStore.userInfo?.userId as number,
 //     });
 //     console.log(res);

@@ -1,3 +1,5 @@
+import type { Component } from 'vue';
+
 export interface GetSessionListParams {
   /**
    * 创建者
@@ -68,7 +70,8 @@ export interface ChatSessionVo {
   /**
    * 主键
    */
-  id?: number;
+  // id?: number
+  id?: string;
   /**
    * 备注
    */
@@ -85,6 +88,10 @@ export interface ChatSessionVo {
    * 用户id
    */
   userId?: number;
+  /**
+   * 自定义的消息前缀图标字段
+   */
+  prefixIcon?: Component;
 }
 
 /**
@@ -106,7 +113,8 @@ export interface CreateSessionDTO {
   /**
    * 主键
    */
-  id?: number;
+  // id?: number;
+  id?: string;
   /**
    * 请求参数
    */
@@ -114,11 +122,11 @@ export interface CreateSessionDTO {
   /**
    * 备注
    */
-  remark: string;
+  remark?: string;
   /**
    * 会话内容
    */
-  sessionContent: string;
+  sessionContent?: string;
   /**
    * 会话标题
    */

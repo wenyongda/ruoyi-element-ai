@@ -4,6 +4,7 @@ import type { ConversationItem, GroupableOptions } from 'vue-element-plus-x/type
 import type { ChatSessionVo } from '@/api/session/types';
 import { useRoute, useRouter } from 'vue-router';
 import logo from '@/assets/images/logo.png';
+import SvgIcon from '@/components/SvgIcon/index.vue';
 import Collapse from '@/layouts/components/Header/components/Collapse.vue';
 import { useDesignStore } from '@/stores';
 import { useSessionStore } from '@/stores/modules/session';
@@ -13,19 +14,10 @@ const router = useRouter();
 const designStore = useDesignStore();
 const sessionStore = useSessionStore();
 
-// const sessionId = computed(() => Number(route.params?.id));
+const sessionId = computed(() => route.params?.id);
 const conversationsList = computed(() => sessionStore.sessionList);
-
-/* 创建会话 开始 */
-function handleCreatChat() {
-  console.log('创建新会话');
-  // 创建会话, 跳转到默认聊天
-  sessionStore.createSessionBtn();
-}
-/* 创建会话 结束 */
-
-/* 会话组件 开始 */
-const active = computed<string>(() => (route.params?.id as string) ?? '');
+const loadMoreLoading = computed(() => sessionStore.isLoadingMore);
+const active = ref();
 
 // 自定义分组选项
 const customGroupOptions: GroupableOptions = {
@@ -38,8 +30,27 @@ const customGroupOptions: GroupableOptions = {
   },
 };
 
+onMounted(async () => {
+  // 获取会话列表
+  await sessionStore.requestSessionList();
+  // 高亮最新会话
+  if (conversationsList.value.length > 0 && sessionId.value) {
+    active.value = sessionId.value;
+    // 通过 ID 查询详情，设置当前会话 (因为有分页)
+    // sessionStore.currentSession = sessionStore.getSessionById(sessionId.value);
+  }
+});
+
+// 创建会话
+function handleCreatChat() {
+  // 创建会话, 跳转到默认聊天
+  sessionStore.createSessionBtn();
+}
+
+// 切换会话
 function handleChange(item: ConversationItem<ChatSessionVo>) {
-  console.log('点击了会话 item', item);
+  sessionStore.setCurrentSession(item);
+  active.value = item.id;
   router.replace({
     name: 'chatWithId',
     params: {
@@ -47,11 +58,83 @@ function handleChange(item: ConversationItem<ChatSessionVo>) {
     },
   });
 }
-/* 会话组件 结束 */
 
-watchEffect(() => {
-  console.log('active', active.value, '>>>');
-});
+// 处理组件触发的加载更多事件
+async function handleLoadMore() {
+  if (!sessionStore.hasMore)
+    return; // 无更多数据时不加载
+  await sessionStore.loadMoreSessions();
+}
+
+// 右键菜单
+function handleMenuCommand(command: string, item: ConversationItem<ChatSessionVo>) {
+  switch (command) {
+    case 'delete':
+      ElMessageBox.confirm('删除后，聊天记录将不可恢复。', '确定删除对话？', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+        confirmButtonClass: 'el-button--danger',
+        cancelButtonClass: 'el-button--info',
+        roundButton: true,
+      })
+        .then(() => {
+          // 删除会话
+          sessionStore.deleteSessions([item.id!]);
+          nextTick(() => {
+            if (item.id === active.value) {
+              // 如果删除当前会话 返回到默认页
+              sessionStore.createSessionBtn();
+            }
+          });
+        })
+        .catch(() => {
+          // 取消删除
+        });
+      break;
+    case 'rename':
+      ElMessageBox.prompt('', '编辑对话名称', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        inputErrorMessage: '请输入对话名称',
+        confirmButtonClass: 'el-button--primary',
+        cancelButtonClass: 'el-button--info',
+        roundButton: true,
+        inputValue: item.sessionTitle, // 设置默认值
+        inputValidator: (value) => {
+          if (!value) {
+            return false;
+          }
+          return true;
+        },
+      }).then(({ value }) => {
+        sessionStore
+          .updateSession({
+            id: item.id!,
+            sessionTitle: value,
+            sessionContent: item.sessionContent,
+          })
+          .then(() => {
+            ElMessage({
+              type: 'success',
+              message: '修改成功',
+            });
+            nextTick(() => {
+              // 如果是当前会话，则更新当前选中会话信息
+              if (sessionStore.currentSession?.id === item.id) {
+                sessionStore.setCurrentSession({
+                  ...item,
+                  sessionTitle: value,
+                });
+              }
+            });
+          });
+      });
+      break;
+    default:
+      break;
+  }
+}
 </script>
 
 <template>
@@ -94,7 +177,24 @@ watchEffect(() => {
               :tooltip-offset="35"
               show-built-in-menu
               :groupable="customGroupOptions"
-              row-key="key"
+              row-key="id"
+              label-key="sessionTitle"
+              :load-more="handleLoadMore"
+              :load-more-loading="loadMoreLoading"
+              :items-style="{
+                marginLeft: '8px',
+                userSelect: 'none',
+                borderRadius: '16px',
+              }"
+              :items-active-style="{
+                backgroundColor: '#fff',
+                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+                color: 'rgba(0, 0, 0, 0.85)',
+              }"
+              :items-hover-style="{
+                backgroundColor: 'rgba(0, 0, 0, 0.04)',
+              }"
+              @menu-command="handleMenuCommand"
               @change="handleChange"
             />
           </div>
@@ -208,6 +308,12 @@ watchEffect(() => {
         // 会话列表高度-基础样式
         .conversations-wrap {
           height: calc(100vh - 110px);
+
+          .label {
+            display: flex;
+            align-items: center;
+            height: 100%;
+          }
         }
       }
     }

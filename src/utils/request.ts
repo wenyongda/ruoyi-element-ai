@@ -50,4 +50,8 @@ export const post = request.post;
 
 export const get = request.get;
 
+export const put = request.put;
+
+export const del = request.delete;
+
 export default request;

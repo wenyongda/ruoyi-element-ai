@@ -4,12 +4,20 @@ import type {
   // CreateSessionVO,
   GetSessionListParams,
 } from './types';
-import { get, post } from '@/utils/request';
+import { del, get, post, put } from '@/utils/request';
 
-export function getSessionList(params: GetSessionListParams) {
+export function get_session_list(params: GetSessionListParams) {
   return get<ChatSessionVo[]>('/system/session/list', params);
 }
 
-export function createSession(data: CreateSessionDTO) {
+export function create_session(data: CreateSessionDTO) {
   return post('/system/session', data);
+}
+
+export function update_session(data: ChatSessionVo) {
+  return put('/system/session', data);
+}
+
+export function delete_session(ids: string[]) {
+  return del(`/system/session/${ids}`);
 }

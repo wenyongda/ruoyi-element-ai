@@ -1,4 +1,4 @@
-<!--  -->
+<!-- 默认消息列表页 -->
 <script setup lang="ts">
 import WelecomeText from '@/components/WelecomeText/index.vue';
 import { useUserStore } from '@/stores';

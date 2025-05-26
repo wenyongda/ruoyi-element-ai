@@ -1,7 +1,9 @@
 <!-- Header 头部 -->
 <script setup lang="ts">
+import { onKeyStroke } from '@vueuse/core';
 import { SIDE_BAR_WIDTH } from '@/config/index';
 import { useDesignStore, useUserStore } from '@/stores';
+import { useSessionStore } from '@/stores/modules/session';
 import Avatar from './components/Avatar.vue';
 import Collapse from './components/Collapse.vue';
 import CreateChat from './components/CreateChat.vue';
@@ -10,7 +12,7 @@ import TitleEditing from './components/TitleEditing.vue';
 
 const userStore = useUserStore();
 const designStore = useDesignStore();
-console.log('userStore', userStore.token);
+const sessionStore = useSessionStore();
 
 onMounted(() => {
   // 全局设置侧边栏默认宽度 (这个是不变的，一开始就设置)
@@ -24,6 +26,17 @@ onMounted(() => {
       `${SIDE_BAR_WIDTH}px`,
     );
   }
+});
+
+// 定义 Ctrl+K 的处理函数
+function handleCtrlK(event: KeyboardEvent) {
+  event.preventDefault(); // 防止默认行为
+  sessionStore.createSessionBtn();
+}
+
+// 设置全局的键盘按键监听
+onKeyStroke(event => event.ctrlKey && event.key.toLowerCase() === 'k', handleCtrlK, {
+  passive: false,
 });
 </script>
 

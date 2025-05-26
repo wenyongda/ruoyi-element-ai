@@ -18,6 +18,10 @@ export function update_session(data: ChatSessionVo) {
   return put('/system/session', data);
 }
 
+export function get_session(id: string) {
+  return get<ChatSessionVo>(`/system/session/${id}`);
+}
+
 export function delete_session(ids: string[]) {
   return del(`/system/session/${ids}`);
 }

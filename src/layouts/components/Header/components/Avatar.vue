@@ -60,6 +60,7 @@ function handleClick(item: any) {
         confirmButtonClass: 'el-button--danger',
         cancelButtonClass: 'el-button--info',
         roundButton: true,
+        autofocus: false,
       })
         .then(() => {
           // 在这里执行退出方法

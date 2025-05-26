@@ -1,8 +1,9 @@
 <!-- Aside 侧边栏 -->
 <script setup lang="ts">
-import type { ConversationItem, GroupableOptions } from 'vue-element-plus-x/types/Conversations';
+import type { ConversationItem } from 'vue-element-plus-x/types/Conversations';
 import type { ChatSessionVo } from '@/api/session/types';
 import { useRoute, useRouter } from 'vue-router';
+import { get_session } from '@/api/session';
 import logo from '@/assets/images/logo.png';
 import SvgIcon from '@/components/SvgIcon/index.vue';
 import Collapse from '@/layouts/components/Header/components/Collapse.vue';
@@ -17,27 +18,16 @@ const sessionStore = useSessionStore();
 const sessionId = computed(() => route.params?.id);
 const conversationsList = computed(() => sessionStore.sessionList);
 const loadMoreLoading = computed(() => sessionStore.isLoadingMore);
-const active = ref();
-
-// 自定义分组选项
-const customGroupOptions: GroupableOptions = {
-  // 自定义分组排序，学习 > 工作 > 个人 > 未分组
-  sort: (a: any, b: any) => {
-    const order: Record<string, number> = { 学习: 0, 工作: 1, 个人: 2, 未分组: 3 };
-    const orderA = order[a] !== undefined ? order[a] : 999;
-    const orderB = order[b] !== undefined ? order[b] : 999;
-    return orderA - orderB;
-  },
-};
+const active = computed(() => sessionStore.currentSession?.id);
 
 onMounted(async () => {
   // 获取会话列表
   await sessionStore.requestSessionList();
   // 高亮最新会话
   if (conversationsList.value.length > 0 && sessionId.value) {
-    active.value = sessionId.value;
+    const currentSessionRes = await get_session(`${sessionId.value}`);
     // 通过 ID 查询详情，设置当前会话 (因为有分页)
-    // sessionStore.currentSession = sessionStore.getSessionById(sessionId.value);
+    sessionStore.setCurrentSession(currentSessionRes.data);
   }
 });
 
@@ -50,7 +40,6 @@ function handleCreatChat() {
 // 切换会话
 function handleChange(item: ConversationItem<ChatSessionVo>) {
   sessionStore.setCurrentSession(item);
-  active.value = item.id;
   router.replace({
     name: 'chatWithId',
     params: {
@@ -77,6 +66,7 @@ function handleMenuCommand(command: string, item: ConversationItem<ChatSessionVo
         confirmButtonClass: 'el-button--danger',
         cancelButtonClass: 'el-button--info',
         roundButton: true,
+        autofocus: false,
       })
         .then(() => {
           // 删除会话
@@ -101,6 +91,7 @@ function handleMenuCommand(command: string, item: ConversationItem<ChatSessionVo
         cancelButtonClass: 'el-button--info',
         roundButton: true,
         inputValue: item.sessionTitle, // 设置默认值
+        autofocus: false,
         inputValidator: (value) => {
           if (!value) {
             return false;
@@ -174,11 +165,12 @@ function handleMenuCommand(command: string, item: ConversationItem<ChatSessionVo
               :items="conversationsList"
               :label-max-width="200"
               :show-tooltip="true"
-              :tooltip-offset="35"
+              :tooltip-offset="60"
               show-built-in-menu
-              :groupable="customGroupOptions"
+              groupable
               row-key="id"
               label-key="sessionTitle"
+              tooltip-placement="right"
               :load-more="handleLoadMore"
               :load-more-loading="loadMoreLoading"
               :items-style="{
@@ -396,6 +388,7 @@ function handleMenuCommand(command: string, item: ConversationItem<ChatSessionVo
 
   // 群组标题样式 和 侧边栏菜单背景色一致
   .conversation-group-title {
+    padding-left: 12px !important;
     background-color: var(--sidebar-background-color) !important;
   }
 }

@@ -2,6 +2,7 @@ import type { HookFetchPlugin } from 'hook-fetch';
 import { ElMessage } from 'element-plus';
 import hookFetch from 'hook-fetch';
 import { sseTextDecoderPlugin } from 'hook-fetch/plugins';
+import router from '@/routers';
 import { useUserStore } from '@/stores';
 
 interface BaseResponse {
@@ -33,6 +34,24 @@ function jwtPlugin(): HookFetchPlugin<BaseResponse> {
       if (response.result?.code === 200) {
         return response;
       }
+      // 处理500逻辑
+      if (response.result?.code === 500) {
+        router.replace({
+          name: '500',
+        });
+        ElMessage.error(response.result?.msg);
+        return Promise.reject(response);
+      }
+      // 处理403逻辑
+      if (response.result?.code === 403) {
+        // 跳转到403页面（确保路由已配置）
+        router.replace({
+          name: '403',
+        });
+        ElMessage.error(response.result?.msg);
+        return Promise.reject(response);
+      }
+      // 处理401逻辑
       if (response.result?.code === 401) {
         // 如果没有权限，退出，且弹框提示登录
         userStore.logout();

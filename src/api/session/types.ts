@@ -89,6 +89,10 @@ export interface ChatSessionVo {
    */
   userId?: number;
   /**
+   * 创建时间
+   */
+  createTime?: Date;
+  /**
    * 自定义的消息前缀图标字段
    */
   prefixIcon?: Component;

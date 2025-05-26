@@ -257,11 +257,13 @@ function handleMenuCommand(command: string, item: ConversationItem<ChatSessionVo
         padding: 0 12px;
 
         .creat-chat-btn {
+          user-select: none;
           display: flex;
           align-items: center;
           padding: 8px 6px;
           margin-top: 16px;
           margin-bottom: 6px;
+          color: #0057ff;
           background-color: rgba(0, 87, 255, 0.06);
           border-radius: 12px;
           border: 1px solid rgba(0, 102, 255, 0.15);

@@ -24,7 +24,10 @@ provide('refresh', refreshMainPage);
 </script>
 
 <template>
-  <el-main class="layout-main">
+  <el-main
+    class="layout-main"
+    :class="{ 'layout-main-overfow-hidden': useroute.meta.isDefaultChat }"
+  >
     <router-view v-slot="{ Component, route }">
       <transition :name="transitionName" mode="out-in" appear>
         <keep-alive :max="10" :include="keepAliveStore.keepAliveName">
@@ -36,7 +39,7 @@ provide('refresh', refreshMainPage);
 </template>
 
 <style scoped lang="scss">
-.layout-main {
+.layout-main-overfow-hidden {
   overflow: hidden;
 }
 

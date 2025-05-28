@@ -19,7 +19,6 @@ export const useModelStore = defineStore('model', () => {
     try {
       const res = await getModelList();
       modelList.value = res.data;
-      console.log('模型列表', res.data);
     }
     catch (error) {
       console.error('requestModelList错误', error);

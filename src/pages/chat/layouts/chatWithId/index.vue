@@ -6,7 +6,9 @@ import type { ThinkingStatus } from 'vue-element-plus-x/types/Thinking';
 import { Loading, Position } from '@element-plus/icons-vue';
 import { useXStream } from 'vue-element-plus-x';
 import { useRoute } from 'vue-router';
+import { send } from '@/api/chat/index';
 import { useChatStore } from '@/stores/modules/chat';
+import { useModelStore } from '@/stores/modules/model';
 
 type MessageItem = BubbleProps & {
   key: number;
@@ -16,15 +18,16 @@ type MessageItem = BubbleProps & {
   expanded?: boolean;
 };
 
-const { startStream, cancel, data, error, isLoading } = useXStream();
+const { startStream: _, cancel, data, error, isLoading } = useXStream();
 
-const BASE_URL = 'https://api.siliconflow.cn/v1/chat/completions';
+// const BASE_URL = 'https://api.siliconflow.cn/v1/chat/completions';
 // 仅供测试，请勿拿去测试其他付费模型
-const API_KEY = 'sk-vfjyscildobjnrijtcllnkhtcouidcxdgjxtldzqzeowrbga';
-const MODEL = 'THUDM/GLM-Z1-9B-0414';
+// const API_KEY = 'sk-vfjyscildobjnrijtcllnkhtcouidcxdgjxtldzqzeowrbga';
+// const MODEL = 'THUDM/GLM-Z1-9B-0414';
 
 const route = useRoute();
 const chatStore = useChatStore();
+const modelStore = useModelStore();
 const isDeepThinking = computed(() => chatStore.isDeepThinking);
 const inputValue = ref('帮我写一篇小米手机介绍');
 const senderRef = ref<any>(null);
@@ -34,9 +37,29 @@ const processedIndex = ref(0);
 
 watch(
   () => route.params?.id,
-  (_id_) => {
+  async (_id_) => {
     if (_id_) {
-      chatStore.requestChatList(Number(_id_));
+      await chatStore.requestChatList(`${_id_}`);
+      // 判断的当前会话id是否有聊天记录
+      if (chatStore.chatMap[`${_id_}`] && chatStore.chatMap[`${_id_}`].length) {
+        bubbleItems.value = chatStore.chatMap[`${_id_}`].map((item: any) => ({
+          key: item.id,
+          avatar:
+            item.role === 'user'
+              ? 'https://avatars.githubusercontent.com/u/76239030?v=4'
+              : 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
+          content: item.content,
+          avatarSize: '32px',
+          role: item.role,
+          typing: false,
+        }));
+
+        // 滚动到底部
+        setTimeout(() => {
+          bubbleListRef.value!.scrollToBottom();
+        }, 350);
+      }
+
       const v = localStorage.getItem('chatContent');
       if (v) {
         inputValue.value = v;
@@ -122,28 +145,42 @@ async function startSSE() {
     // 这里有必要调用一下 BubbleList 组件的滚动到底部 手动触发 自动滚动
     bubbleListRef.value!.scrollToBottom();
 
-    const response = await fetch(BASE_URL, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${API_KEY}`,
-        'Content-Type': 'application/json',
-        'Accept': 'text/event-stream',
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        messages: bubbleItems.value
-          .filter((item: any) => item.role === 'user')
-          .map((item: any) => ({
-            role: item.role,
-            content: item.content,
-          })),
-        stream: true,
-      }),
+    const res = await send({
+      messages: bubbleItems.value
+        .filter((item: any) => item.role === 'user')
+        .map((item: any) => ({
+          role: item.role,
+          content: item.content,
+        })),
+      sessionId: Number(route.params?.id),
+      userId: 1,
+      model: modelStore.currentModelInfo.modelName ?? '',
     });
-    const readableStream = response.body!;
-    // 重置状态
-    processedIndex.value = 0;
-    await startStream({ readableStream });
+
+    console.log('res', res);
+
+    // const response = await fetch(BASE_URL, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Authorization': `Bearer ${API_KEY}`,
+    //     'Content-Type': 'application/json',
+    //     'Accept': 'text/event-stream',
+    //   },
+    //   body: JSON.stringify({
+    //     model: MODEL,
+    //     messages: bubbleItems.value
+    //       .filter((item: any) => item.role === 'user')
+    //       .map((item: any) => ({
+    //         role: item.role,
+    //         content: item.content,
+    //       })),
+    //     stream: true,
+    //   }),
+    // });
+    // const readableStream = response.body!;
+    // // 重置状态
+    // processedIndex.value = 0;
+    // await startStream({ readableStream });
   }
   catch (err) {
     handleError(err);

@@ -8,6 +8,7 @@ const { copy } = useClipboard();
 
 const name = ref('');
 const iconList = ref(icons);
+console.log(icons);
 
 function filterIcons() {
   iconList.value = JSON.parse(JSON.stringify(icons));

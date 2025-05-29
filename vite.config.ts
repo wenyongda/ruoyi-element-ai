@@ -2,7 +2,6 @@ import { defineConfig, loadEnv } from "vite";
 import path from "path";
 import plugins from "./.build/plugins";
 
-// TODO: 开发一个环境变量ts类型处理的插件
 // https://vite.dev/config/
 export default defineConfig((cnf) => {
   const { mode } = cnf;

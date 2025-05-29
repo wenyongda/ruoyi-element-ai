@@ -26,11 +26,11 @@ function plugins({ mode, command }: ConfigEnv): PluginOption[] {
         enabled: true,
       },
       resolvers: [ElementPlusResolver()],
-      dts: path.resolve(__dirname, './types/auto-imports.d.ts'),
+      dts: path.join(root, 'types', 'auto-imports.d.ts'),
     }),
     Components({
       resolvers: [ElementPlusResolver()],
-      dts: path.resolve(__dirname, './types/components.d.ts'),
+      dts: path.join(root, 'types', 'components.d.ts'),
     }),
     createSvgIcon(command === 'build'),
   ];

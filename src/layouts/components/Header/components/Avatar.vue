@@ -95,7 +95,7 @@ function handleClick(item: any) {
     <Popover
       ref="popoverRef"
       position="bottom-end"
-      :offset="[-10, 8]"
+      :offset="[0, 8]"
       :trigger-style="{ cursor: 'pointer' }"
       popover-class="popover-content"
       :popover-style="popoverStyle"

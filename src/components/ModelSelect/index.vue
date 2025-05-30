@@ -49,7 +49,7 @@ function handleClick(item: GetSessionListVO) {
     <Popover
       ref="popoverRef"
       position="top-start"
-      :offset="[-14, 14]"
+      :offset="[-14, 10]"
       :trigger-style="{ cursor: 'pointer' }"
       popover-class="popover-content"
       :popover-style="popoverStyle"
@@ -58,7 +58,7 @@ function handleClick(item: GetSessionListVO) {
       <!-- 触发元素插槽 -->
       <template #trigger>
         <div
-          class="model-switch-box select-none flex items-center gap-4px px-10px py-8px rounded-15px cursor-pointer font-size-12px"
+          class="model-switch-box select-none flex items-center gap-4px p-10px rounded-10px cursor-pointer font-size-12px border-[rgba()]"
         >
           <div class="model-switch-box-icon">
             <SvgIcon name="models" size="12" />
@@ -70,7 +70,11 @@ function handleClick(item: GetSessionListVO) {
       </template>
 
       <div class="popover-content-box">
-        <div v-for="item in popoverList" :key="item.id" class="popover-content-box-items h-full">
+        <div
+          v-for="item in popoverList"
+          :key="item.id"
+          class="popover-content-box-items flex rounded-8px select-none transition-all transition-duration-300 flex items-center gap-8px p-4px hover:cursor-pointer hover:bg-[rgba(0,0,0,.04)]"
+        >
           <el-tooltip
             popper-class="rounded-tooltip"
             effect="dark"
@@ -78,6 +82,7 @@ function handleClick(item: GetSessionListVO) {
             trigger="hover"
             :offset="10"
             :show-arrow="false"
+            transition="zoom-fade"
           >
             <template #content>
               <div class="popover-content-box-item-text text-wrap max-w-200px rounded-lg">
@@ -85,15 +90,11 @@ function handleClick(item: GetSessionListVO) {
               </div>
             </template>
             <div
-              class="popover-content-box-item select-none transition-all transition-duration-300 flex items-center h-full gap-8px p-8px pl-10px pr-12px rounded-lg hover:cursor-pointer hover:bg-[rgba(0,0,0,.04)]"
+              class="popover-content-box-item font-size-12px text-overflow w-full line-height-16px"
               :class="{ 'bg-[rgba(0,0,0,.04)] is-select': item.modelName === currentModelName }"
               @click="handleClick(item)"
             >
-              <div
-                class="popover-content-box-item-text font-size-12px text-overflow max-h-120px line-height-snug"
-              >
-                {{ item.modelName }}
-              </div>
+              {{ item.modelName }}
             </div>
           </el-tooltip>
         </div>
@@ -106,11 +107,32 @@ function handleClick(item: GetSessionListVO) {
 .model-switch-box {
   color: var(--el-color-primary, #409eff);
   border: 1px solid var(--el-color-primary, #409eff);
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 .popover-content-box-item.is-select {
   color: var(--el-color-primary, #409eff);
   font-weight: 700;
+}
+
+.popover-content-box {
+  // background-color: red;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  // 滚动条样式
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f5f5f5;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+  }
 }
 </style>

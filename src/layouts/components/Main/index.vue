@@ -66,24 +66,24 @@ provide('refresh', refreshMainPage);
 }
 
 /* 带id聊天页面：中间缩放动画 */
-.zoom-fade-enter-from {
-  transform: scale(0.8); /* 进入前：缩小隐藏 */
-  opacity: 0;
-}
-.zoom-fade-enter-active,
-.zoom-fade-leave-active {
-  transition: all 0.3s; /* 缓入动画 */
-}
-.zoom-fade-enter-to {
-  transform: scale(1); /* 进入后：正常大小 */
-  opacity: 1;
-}
-.zoom-fade-leave-from {
-  transform: scale(1); /* 离开前：正常大小 */
-  opacity: 1;
-}
-.zoom-fade-leave-to {
-  transform: scale(0.8); /* 离开后：缩小隐藏 */
-  opacity: 0;
-}
+// .zoom-fade-enter-from {
+//   transform: scale(0.9); /* 进入前：缩小隐藏 */
+//   opacity: 0;
+// }
+// .zoom-fade-enter-active,
+// .zoom-fade-leave-active {
+//   transition: all 0.3s; /* 缓入动画 */
+// }
+// .zoom-fade-enter-to {
+//   transform: scale(1); /* 进入后：正常大小 */
+//   opacity: 1;
+// }
+// .zoom-fade-leave-from {
+//   transform: scale(1); /* 离开前：正常大小 */
+//   opacity: 1;
+// }
+// .zoom-fade-leave-to {
+//   transform: scale(0.9); /* 离开后：缩小隐藏 */
+//   opacity: 0;
+// }
 </style>

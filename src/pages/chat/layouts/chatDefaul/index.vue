@@ -3,15 +3,11 @@
 import ModelSelect from '@/components/ModelSelect/index.vue';
 import WelecomeText from '@/components/WelecomeText/index.vue';
 import { useUserStore } from '@/stores';
-import { useChatStore } from '@/stores/modules/chat';
 import { useSessionStore } from '@/stores/modules/session';
 
 const userStore = useUserStore();
-const chatStore = useChatStore();
 const sessionStore = useSessionStore();
 const senderValue = ref('');
-
-const isDeepThinking = computed(() => chatStore.isDeepThinking);
 
 async function handleSend() {
   localStorage.setItem('chatContent', senderValue.value);
@@ -21,11 +17,6 @@ async function handleSend() {
     sessionTitle: senderValue.value.slice(0, 10),
     remark: senderValue.value.slice(0, 10),
   });
-}
-
-// 设置是否深度思考
-function setIsDeepThinking() {
-  chatStore.setDeepThinking(!chatStore.isDeepThinking);
 }
 </script>
 
@@ -47,24 +38,12 @@ function setIsDeepThinking() {
       <template #prefix>
         <div class="flex-1 flex items-center gap-8px flex-none w-fit overflow-hidden">
           <ModelSelect />
-
           <div
-            class="flex items-center gap-4px px-12px py-8px rounded-15px cursor-pointer font-size-12px border-1px border-gray border-solid hover:bg-[rgba(0,0,0,.04)]"
+            class="flex items-center gap-4px p-10px rounded-10px cursor-pointer font-size-14px border-1px border-[rgba(0,0,0,0.08)] border-solid hover:bg-[rgba(0,0,0,.04)]"
           >
             <el-icon>
               <Paperclip />
             </el-icon>
-          </div>
-
-          <div
-            :class="{ 'is-select': isDeepThinking }"
-            class="flex items-center gap-4px px-10px py-8px rounded-15px cursor-pointer font-size-12px border-1px border-gray border-solid hover:bg-[rgba(0,0,0,.04)]"
-            @click="setIsDeepThinking"
-          >
-            <el-icon>
-              <ElementPlus />
-            </el-icon>
-            <span>深度思考</span>
           </div>
         </div>
       </template>
@@ -84,12 +63,6 @@ function setIsDeepThinking() {
 
   .chat-defaul-sender {
     width: 100%;
-  }
-
-  .is-select {
-    color: var(--el-color-primary, #409eff);
-    border: 1px solid var(--el-color-primary, #409eff);
-    border-radius: 15px;
   }
 }
 </style>

@@ -13,6 +13,9 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@floating-ui/core": "^1.7.0",
+    "@floating-ui/dom": "^1.7.0",
+    "@floating-ui/vue": "^1.1.6",
     "@jsonlee_12138/enum": "^1.0.4",
     "@vueuse/core": "^13.2.0",
     "@vueuse/integrations": "^13.2.0",

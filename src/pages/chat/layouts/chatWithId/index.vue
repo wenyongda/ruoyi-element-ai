@@ -28,7 +28,6 @@ const { startStream: _, cancel, data, error, isLoading } = useXStream();
 const route = useRoute();
 const chatStore = useChatStore();
 const modelStore = useModelStore();
-const isDeepThinking = computed(() => chatStore.isDeepThinking);
 const inputValue = ref('帮我写一篇小米手机介绍');
 const senderRef = ref<any>(null);
 const bubbleItems = ref<MessageItem[]>([]);
@@ -75,10 +74,6 @@ watch(
   { immediate: true, deep: true },
 );
 
-// 设置是否深度思考
-function setIsDeepThinking() {
-  chatStore.setDeepThinking(!chatStore.isDeepThinking);
-}
 // 封装数据处理逻辑
 function handleDataChunk(chunk: string) {
   if (chunk === ' [DONE]') {
@@ -253,22 +248,11 @@ function handleChange(payload: { value: boolean; status: ThinkingStatus }) {
         <template #prefix>
           <div class="flex-1 flex items-center gap-8px flex-none w-fit overflow-hidden">
             <div
-              class="flex items-center gap-4px px-12px py-8px rounded-15px cursor-pointer font-size-12px border-1px border-gray border-solid hover:bg-[rgba(0,0,0,.04)]"
+              class="flex items-center gap-4px p-10px rounded-10px cursor-pointer font-size-14px border-1px border-[rgba(0,0,0,0.08)] border-solid hover:bg-[rgba(0,0,0,.04)]"
             >
               <el-icon>
                 <Paperclip />
               </el-icon>
-            </div>
-
-            <div
-              :class="{ 'is-select': isDeepThinking }"
-              class="flex items-center gap-4px px-10px py-8px rounded-15px cursor-pointer font-size-12px border-1px border-gray border-solid hover:bg-[rgba(0,0,0,.04)]"
-              @click="setIsDeepThinking"
-            >
-              <el-icon>
-                <ElementPlus />
-              </el-icon>
-              <span>深度思考</span>
             </div>
           </div>
         </template>
@@ -337,12 +321,6 @@ function handleChange(payload: { value: boolean; status: ThinkingStatus }) {
   .chat-defaul-sender {
     margin-bottom: 22px;
     width: 100%;
-  }
-
-  .is-select {
-    color: var(--el-color-primary, #409eff);
-    border: 1px solid var(--el-color-primary, #409eff);
-    border-radius: 15px;
   }
 }
 </style>

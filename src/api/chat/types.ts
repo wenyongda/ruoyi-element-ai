@@ -32,7 +32,7 @@ export interface SendDTO {
   /**
    * 会话id
    */
-  sessionId?: number;
+  sessionId?: string;
   /**
    * 是否开启流式对话
    */

@@ -17,7 +17,22 @@ export const useChatStore = defineStore('chat', () => {
   const chatMap = ref<Record<string, ChatMessageVo[]>>({});
 
   const setChatMap = (id: string, data: ChatMessageVo[]) => {
-    chatMap.value[id] = data;
+    chatMap.value[id] = data?.map((item: ChatMessageVo) => {
+      const isUser = item.role === 'user';
+      return {
+        ...item,
+        key: item.id,
+        placement: isUser ? 'end' : 'start',
+        isMarkdown: !isUser,
+        // variant: 'shadow',
+        // shape: 'corner',
+        avatar: isUser
+          ? 'https://avatars.githubusercontent.com/u/76239030?v=4'
+          : 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
+        avatarSize: '32px',
+        typing: false,
+      };
+    });
   };
 
   // 获取当前会话的聊天记录

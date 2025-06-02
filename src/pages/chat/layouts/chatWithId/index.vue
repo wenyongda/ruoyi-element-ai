@@ -81,7 +81,7 @@ watch(
 function handleDataChunk(chunk: AnyObject) {
   try {
     // console.log('New chunk:', chunk);
-    const reasoningChunk = chunk.choices[0].delta.reasoning_content;
+    const reasoningChunk = chunk.choices?.[0].delta.reasoning_content;
     if (reasoningChunk) {
       // 开始思考链状态
       bubbleItems.value[bubbleItems.value.length - 1].thinkingStatus = 'thinking';
@@ -91,7 +91,7 @@ function handleDataChunk(chunk: AnyObject) {
       }
     }
 
-    const parsedChunk = chunk.choices[0].delta.content;
+    const parsedChunk = chunk.choices?.[0].delta.content;
     if (parsedChunk) {
       // 结束 思考链状态
       bubbleItems.value[bubbleItems.value.length - 1].thinkingStatus = 'end';
@@ -132,7 +132,7 @@ async function startSSE(chatContent: string) {
           role: item.role,
           content: item.content,
         })),
-      sessionId: String(route.params?.id),
+      sessionId: route.params?.id !== 'not_login' ? String(route.params?.id) : undefined,
       userId: userStore.userInfo?.userId,
       model: modelStore.currentModelInfo.modelName ?? '',
     });

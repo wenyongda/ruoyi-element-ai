@@ -44,7 +44,7 @@ async function showPopover() {
 // 点击
 function handleClick(item: GetSessionListVO) {
   modelStore.setCurrentModelInfo(item);
-  popoverRef.value.hide();
+  popoverRef.value?.hide?.();
 }
 </script>
 

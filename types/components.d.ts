@@ -9,7 +9,6 @@ export {};
 declare module 'vue' {
   export interface GlobalComponents {
     AccountPassword: typeof import('./../src/components/LoginDialog/components/FormLogin/AccountPassword.vue')['default']
-    copy: typeof import('./../src/components/Popover/index copy.vue')['default']
     DeepThinking: typeof import('./../src/components/DeepThinking/index.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
@@ -23,7 +22,6 @@ declare module 'vue' {
     ElImage: typeof import('element-plus/es')['ElImage']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElMain: typeof import('element-plus/es')['ElMain']
-    ElTooltip: typeof import('element-plus/es')['ElTooltip']
     FilesSelect: typeof import('./../src/components/FilesSelect/index.vue')['default']
     IconSelect: typeof import('./../src/components/IconSelect/index.vue')['default']
     LoginDialog: typeof import('./../src/components/LoginDialog/index.vue')['default']
@@ -36,7 +34,7 @@ declare module 'vue' {
     VerificationCode: typeof import('./../src/components/LoginDialog/components/FormLogin/VerificationCode.vue')['default']
     WelecomeText: typeof import('./../src/components/WelecomeText/index.vue')['default']
   }
-  export interface GlobalDirectives {
+  export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

@@ -19,6 +19,6 @@
 
 
   /* 覆盖 element-plus 样式 */
-  --el-border-radius-base: 12px;
-  --el-messagebox-border-radius: 16px;
+  --el-border-radius-base: 12px !important;
+  --el-messagebox-border-radius: 16px !important;
 }

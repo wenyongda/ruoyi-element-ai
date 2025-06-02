@@ -54,7 +54,7 @@ function handleClick(item: any) {
       console.log('点击了设置');
       break;
     case '4':
-      popoverRef.value.hide();
+      popoverRef.value?.hide?.();
       ElMessageBox.confirm('退出登录不会丢失任何数据，你仍可以登录此账号。', '确认退出登录？', {
         confirmButtonText: '确认退出',
         cancelButtonText: '取消',

@@ -28,9 +28,15 @@ onMounted(async () => {
     const currentSessionRes = await get_session(`${sessionId.value}`);
     // 通过 ID 查询详情，设置当前会话 (因为有分页)
     sessionStore.setCurrentSession(currentSessionRes.data);
-    active.value = `${sessionId.value}`;
   }
 });
+
+watch(
+  () => sessionStore.currentSession,
+  (newValue) => {
+    active.value = newValue ? `${newValue.id}` : undefined;
+  },
+);
 
 // 创建会话
 function handleCreatChat() {

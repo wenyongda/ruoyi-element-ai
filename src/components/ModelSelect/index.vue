@@ -28,6 +28,10 @@ const popoverStyle = ref({
   width: '200px',
   padding: '4px',
   height: 'fit-content',
+  background: 'var(--el-bg-color, #fff)',
+  border: '1px solid var(--el-border-color-light)',
+  borderRadius: '8px',
+  boxShadow: '0 2px 12px 0 rgba(0, 0, 0, 0.1)',
 });
 const popoverRef = ref();
 
@@ -45,25 +49,25 @@ function handleClick(item: GetSessionListVO) {
 </script>
 
 <template>
-  <div class="model-switch">
+  <div class="model-select">
     <Popover
       ref="popoverRef"
-      position="top-start"
-      :offset="[-14, 10]"
-      :trigger-style="{ cursor: 'pointer' }"
+      placement="top-start"
+      :offset="[4, 0]"
       popover-class="popover-content"
       :popover-style="popoverStyle"
+      trigger="clickTarget"
       @show="showPopover"
     >
       <!-- 触发元素插槽 -->
       <template #trigger>
         <div
-          class="model-switch-box select-none flex items-center gap-4px p-10px rounded-10px cursor-pointer font-size-12px border-[rgba()]"
+          class="model-select-box select-none flex items-center gap-4px p-10px rounded-10px cursor-pointer font-size-12px border-[rgba()]"
         >
-          <div class="model-switch-box-icon">
+          <div class="model-select-box-icon">
             <SvgIcon name="models" size="12" />
           </div>
-          <div class="model-switch-box-text font-size-12px">
+          <div class="model-select-box-text font-size-12px">
             {{ currentModelName }}
           </div>
         </div>
@@ -73,30 +77,30 @@ function handleClick(item: GetSessionListVO) {
         <div
           v-for="item in popoverList"
           :key="item.id"
-          class="popover-content-box-items flex rounded-8px select-none transition-all transition-duration-300 flex items-center gap-8px p-4px hover:cursor-pointer hover:bg-[rgba(0,0,0,.04)]"
+          class="popover-content-box-items w-full rounded-8px select-none transition-all transition-duration-300 flex items-center hover:cursor-pointer hover:bg-[rgba(0,0,0,.04)]"
         >
-          <el-tooltip
-            popper-class="rounded-tooltip"
-            effect="dark"
+          <Popover
+            trigger-class="popover-trigger-item-text"
+            popover-class="rounded-tooltip"
             placement="right"
             trigger="hover"
-            :offset="10"
-            :show-arrow="false"
-            transition="zoom-fade"
+            :offset="[12, 0]"
           >
-            <template #content>
-              <div class="popover-content-box-item-text text-wrap max-w-200px rounded-lg">
-                {{ item.remark }}
+            <template #trigger>
+              <div
+                class="popover-content-box-item p-4px font-size-12px text-overflow line-height-16px"
+                :class="{ 'bg-[rgba(0,0,0,.04)] is-select': item.modelName === currentModelName }"
+                @click="handleClick(item)"
+              >
+                {{ item.modelName }}
               </div>
             </template>
             <div
-              class="popover-content-box-item font-size-12px text-overflow w-full line-height-16px"
-              :class="{ 'bg-[rgba(0,0,0,.04)] is-select': item.modelName === currentModelName }"
-              @click="handleClick(item)"
+              class="popover-content-box-item-text text-wrap max-w-200px rounded-lg p-8px font-size-12px line-height-tight"
             >
-              {{ item.modelName }}
+              {{ item.remark }}
             </div>
-          </el-tooltip>
+          </Popover>
         </div>
       </div>
     </Popover>
@@ -104,7 +108,7 @@ function handleClick(item: GetSessionListVO) {
 </template>
 
 <style scoped lang="scss">
-.model-switch-box {
+.model-select-box {
   color: var(--el-color-primary, #409eff);
   border: 1px solid var(--el-color-primary, #409eff);
   border-radius: 10px;
@@ -116,20 +120,35 @@ function handleClick(item: GetSessionListVO) {
 }
 
 .popover-content-box {
-  // background-color: red;
   height: 200px;
+  gap: 4px;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
 
+  .popover-content-box-items {
+    :deep() {
+      .popover-trigger-item-text {
+        width: 100%;
+      }
+    }
+  }
+
+  .popover-content-box-item-text {
+    background-color: black;
+    color: white;
+  }
+
   // 滚动条样式
   &::-webkit-scrollbar {
     width: 4px;
   }
+
   &::-webkit-scrollbar-track {
     background: #f5f5f5;
   }
+
   &::-webkit-scrollbar-thumb {
     background: #ccc;
     border-radius: 4px;

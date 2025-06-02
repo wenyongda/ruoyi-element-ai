@@ -94,8 +94,8 @@ function handleClick(item: any) {
   <div class="avatar-container">
     <Popover
       ref="popoverRef"
-      position="bottom-end"
-      :offset="[0, 8]"
+      placement="bottom-end"
+      trigger="clickTarget"
       :trigger-style="{ cursor: 'pointer' }"
       popover-class="popover-content"
       :popover-style="popoverStyle"
@@ -105,7 +105,7 @@ function handleClick(item: any) {
         <el-avatar :src="src" :size="28" fit="fit" shape="circle" />
       </template>
 
-      <div class="popover-content-box">
+      <div class="popover-content-box shadow-lg">
         <div v-for="item in popoverList" :key="item.key" class="popover-content-box-items h-full">
           <div
             v-if="!item.divider"
@@ -129,5 +129,13 @@ function handleClick(item: any) {
 .popover-content {
   width: 520px;
   height: 520px;
+}
+
+.popover-content-box {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 8px;
 }
 </style>

@@ -5,9 +5,9 @@ import type { RegisterDTO } from '@/api/auth/types';
 import { useCountdown } from '@vueuse/core';
 import { reactive, ref } from 'vue';
 import { emailCode, register } from '@/api';
-import { useLoginFromStore } from '@/stores/modules/loginFrom';
+import { useLoginFormStore } from '@/stores/modules/loginForm';
 
-const loginFromStore = useLoginFromStore();
+const loginFromStore = useLoginFormStore();
 const countdown = shallowRef(60);
 const { start, stop, resume } = useCountdown(countdown, {
   onComplete() {

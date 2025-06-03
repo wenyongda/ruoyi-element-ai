@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 
 type LoginFormType = 'AccountPassword' | 'VerificationCode' | 'RegistrationForm';
 
-export const useLoginFromStore = defineStore('loginFrom', () => {
+export const useLoginFormStore = defineStore('loginForm', () => {
   const LoginFormType = ref<LoginFormType>('AccountPassword');
 
   // 设置登录表单类型

@@ -6,12 +6,12 @@ import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { login } from '@/api';
 import { useUserStore } from '@/stores';
-import { useLoginFromStore } from '@/stores/modules/loginFrom';
+import { useLoginFormStore } from '@/stores/modules/loginForm';
 import { useSessionStore } from '@/stores/modules/session';
 
 const userStore = useUserStore();
 const sessionStore = useSessionStore();
-const loginFromStore = useLoginFromStore();
+const loginFromStore = useLoginFormStore();
 
 const formRef = ref<FormInstance>();
 

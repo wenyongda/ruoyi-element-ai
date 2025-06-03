@@ -3,13 +3,13 @@ import { ref, watch } from 'vue';
 import logoPng from '@/assets/images/logo.png';
 import SvgIcon from '@/components/SvgIcon/index.vue';
 import { useUserStore } from '@/stores';
-import { useLoginFromStore } from '@/stores/modules/loginFrom';
+import { useLoginFormStore } from '@/stores/modules/loginForm';
 import AccountPassword from './components/FormLogin/AccountPassword.vue';
 import RegistrationForm from './components/FormLogin/RegistrationForm.vue';
 import QrCodeLogin from './components/QrCodeLogin/index.vue';
 
 const userStore = useUserStore();
-const loginFromStore = useLoginFromStore();
+const loginFromStore = useLoginFormStore();
 
 const loginFormType = computed(() => loginFromStore.LoginFormType);
 

@@ -1,10 +1,16 @@
 import type { ChatMessageVo } from '@/api/chat/types';
 import { defineStore } from 'pinia';
-import { getChatList } from '@/api/chat';
+import { getChatList } from '@/api';
 import { useUserStore } from './user';
 
 export const useChatStore = defineStore('chat', () => {
   const userStore = useUserStore();
+
+  // 用户头像
+  const avatar = computed(() => {
+    const userInfo = userStore.userInfo;
+    return userInfo?.avatar || 'https://avatars.githubusercontent.com/u/76239030?v=4';
+  });
 
   // 是否开启深度思考
   const isDeepThinking = ref<boolean>(false);
@@ -27,7 +33,7 @@ export const useChatStore = defineStore('chat', () => {
         // variant: 'shadow',
         // shape: 'corner',
         avatar: isUser
-          ? 'https://avatars.githubusercontent.com/u/76239030?v=4'
+          ? avatar
           : 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
         avatarSize: '32px',
         typing: false,

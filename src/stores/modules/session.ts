@@ -9,7 +9,7 @@ import {
   get_session,
   get_session_list,
   update_session,
-} from '@/api/session';
+} from '@/api';
 import { useUserStore } from './user';
 
 export const useSessionStore = defineStore('session', () => {

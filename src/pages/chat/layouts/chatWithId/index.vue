@@ -1,5 +1,6 @@
 <!-- 每个回话对应的聊天内容 -->
 <script setup lang="ts">
+import type { HookFetchRequest } from 'node_modules/hook-fetch/types/utils';
 import type { AnyObject } from 'typescript-api-pro';
 import type { Sender } from 'vue-element-plus-x';
 import type { BubbleProps } from 'vue-element-plus-x/types/Bubble';
@@ -7,7 +8,7 @@ import type { BubbleListInstance } from 'vue-element-plus-x/types/BubbleList';
 import type { FilesCardProps } from 'vue-element-plus-x/types/FilesCard';
 import type { ThinkingStatus } from 'vue-element-plus-x/types/Thinking';
 import { useRoute } from 'vue-router';
-import { send } from '@/api/chat/index';
+import { send } from '@/api';
 import FilesSelect from '@/components/FilesSelect/index.vue';
 import ModelSelect from '@/components/ModelSelect/index.vue';
 import { useChatStore } from '@/stores/modules/chat';
@@ -29,11 +30,19 @@ const modelStore = useModelStore();
 const filesStore = useFilesStore();
 const userStore = useUserStore();
 
+// 用户头像
+const avatar = computed(() => {
+  const userInfo = userStore.userInfo;
+  return userInfo?.avatar || 'https://avatars.githubusercontent.com/u/76239030?v=4';
+});
+
 const inputValue = ref('');
 const senderRef = ref<InstanceType<typeof Sender> | null>(null);
 const bubbleItems = ref<MessageItem[]>([]);
 const bubbleListRef = ref<BubbleListInstance | null>(null);
 const isLoading = ref(false);
+// 记录发送的返回
+let sendRequest: HookFetchRequest<any, any> | null = null;
 
 watch(
   () => route.params?.id,
@@ -125,7 +134,7 @@ async function startSSE(chatContent: string) {
     // 这里有必要调用一下 BubbleList 组件的滚动到底部 手动触发 自动滚动
     bubbleListRef.value?.scrollToBottom();
 
-    const res = send({
+    sendRequest = send({
       messages: bubbleItems.value
         .filter((item: any) => item.role === 'user')
         .map((item: any) => ({
@@ -137,7 +146,7 @@ async function startSSE(chatContent: string) {
       model: modelStore.currentModelInfo.modelName ?? '',
     });
 
-    for await (const chunk of res) {
+    for await (const chunk of sendRequest.stream()) {
       handleDataChunk(chunk.result as AnyObject);
     }
   }
@@ -154,13 +163,23 @@ async function startSSE(chatContent: string) {
   }
 }
 
+// 中断请求
+async function cancelSSE() {
+  sendRequest?.abort();
+  isLoading.value = false;
+  // 结束最后一条消息打字状态
+  if (bubbleItems.value.length) {
+    bubbleItems.value[bubbleItems.value.length - 1].typing = false;
+  }
+}
+
 // 添加消息 - 维护聊天记录
 function addMessage(message: string, isUser: boolean) {
   const i = bubbleItems.value.length;
   const obj: MessageItem = {
     key: i,
     avatar: isUser
-      ? 'https://avatars.githubusercontent.com/u/76239030?v=4'
+      ? avatar.value
       : 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
     avatarSize: '32px',
     role: isUser ? 'user' : 'system',
@@ -228,6 +247,7 @@ watch(
         allow-speech
         :loading="isLoading"
         @submit="startSSE"
+        @cancel="cancelSSE"
       >
         <template #header>
           <div class="sender-header p-12px pt-6px pb-0px">

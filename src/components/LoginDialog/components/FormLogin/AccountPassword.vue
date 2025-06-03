@@ -6,10 +6,12 @@ import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { login } from '@/api';
 import { useUserStore } from '@/stores';
+import { useLoginFromStore } from '@/stores/modules/loginFrom';
 import { useSessionStore } from '@/stores/modules/session';
 
 const userStore = useUserStore();
 const sessionStore = useSessionStore();
+const loginFromStore = useLoginFromStore();
 
 const formRef = ref<FormInstance>();
 
@@ -45,9 +47,15 @@ async function handleSubmit() {
 
 <template>
   <div class="custom-form">
-    <el-form ref="formRef" :model="formModel" :rules="rules" style="width: 230px">
+    <el-form
+      ref="formRef"
+      :model="formModel"
+      :rules="rules"
+      style="width: 230px"
+      @submit.prevent="handleSubmit"
+    >
       <el-form-item prop="username">
-        <el-input v-model="formModel.username" placeholder="请输入用户名" clearable>
+        <el-input v-model="formModel.username" placeholder="请输入用户名">
           <template #prefix>
             <el-icon>
               <User />
@@ -59,7 +67,6 @@ async function handleSubmit() {
         <el-input
           v-model="formModel.password"
           placeholder="请输入密码"
-          clearable
           type="password"
           show-password
         >
@@ -71,11 +78,22 @@ async function handleSubmit() {
         </el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" style="width: 100%" @click="handleSubmit">
+        <el-button type="primary" style="width: 100%" native-type="submit">
           登录
         </el-button>
       </el-form-item>
     </el-form>
+
+    <!-- 注册登录 -->
+    <div class="form-tip font-size-12px flex items-center">
+      <span>没有账号？</span>
+      <span
+        class="c-[var(--el-color-primar,#409eff)] cursor-pointer"
+        @click="loginFromStore.setLoginFormType('RegistrationForm')"
+      >
+        立即注册
+      </span>
+    </div>
   </div>
 </template>
 

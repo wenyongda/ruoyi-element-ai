@@ -3,10 +3,15 @@ import { ref, watch } from 'vue';
 import logoPng from '@/assets/images/logo.png';
 import SvgIcon from '@/components/SvgIcon/index.vue';
 import { useUserStore } from '@/stores';
+import { useLoginFromStore } from '@/stores/modules/loginFrom';
 import AccountPassword from './components/FormLogin/AccountPassword.vue';
+import RegistrationForm from './components/FormLogin/RegistrationForm.vue';
 import QrCodeLogin from './components/QrCodeLogin/index.vue';
 
 const userStore = useUserStore();
+const loginFromStore = useLoginFromStore();
+
+const loginFormType = computed(() => loginFromStore.LoginFormType);
 
 // 使用 defineModel 定义双向绑定的 visible（需 Vue 3.4+）
 const visible = defineModel<boolean>('visible');
@@ -27,7 +32,7 @@ watch(
   { immediate: true },
 );
 
-// 切换登录模式
+// 切换二维码登录
 function toggleLoginMode() {
   isQrMode.value = !isQrMode.value;
 }
@@ -56,7 +61,7 @@ function onAfterLeave() {
           <div class="left-section">
             <div class="logo-wrap">
               <img :src="logoPng" class="logo-img">
-              <span class="logo-text"> Element Plus X</span>
+              <span class="logo-text">Element Plus X</span>
             </div>
             <div class="ad-banner">
               <SvgIcon name="p-bangong" class-name="animate-up-down" />
@@ -68,17 +73,28 @@ function onAfterLeave() {
               <SvgIcon v-else name="zhanghaodenglu" />
             </div>
             <div class="content-wrapper">
-              <span class="content-title"> 登录后免费使用完整功能 </span>
-
               <div v-if="!isQrMode" class="form-box">
                 <!-- 表单容器，父组件可以自定定义表单插槽 -->
                 <slot name="form">
-                  <!-- 父组件不用插槽则显示默认表单 默认账号密码登录 -->
-                  <div class="form-container">
+                  <!-- 父组件不用插槽则显示默认表单 默认使用 AccountPassword 组件 -->
+                  <div v-if="loginFormType === 'AccountPassword'" class="form-container">
+                    <span class="content-title"> 登录后免费使用完整功能 </span>
+
                     <el-divider content-position="center">
                       账号密码登录
                     </el-divider>
+
                     <AccountPassword />
+                  </div>
+
+                  <div v-if="loginFormType === 'RegistrationForm'" class="form-container">
+                    <span class="content-title"> 登录后免费使用完整功能 </span>
+
+                    <el-divider content-position="center">
+                      邮箱注册账号
+                    </el-divider>
+
+                    <RegistrationForm />
                   </div>
                 </slot>
               </div>
@@ -216,14 +232,12 @@ function onAfterLeave() {
 }
 
 .right-section .content-title {
-  position: absolute;
+  display: flex;
   width: 100%;
   font-size: 20px;
   font-weight: 700;
-  display: flex;
   align-items: center;
   justify-content: center;
-  top: 55px;
 }
 
 .right-section .mode-toggle {

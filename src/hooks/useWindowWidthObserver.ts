@@ -33,18 +33,18 @@ export function useWindowWidthObserver(
       case 'alwaysExpanded':
         designStore.setCollapse(false);
         if (isAbove) {
-          // 大于的时候执行关闭动画
+          // 大于的时候执行关闭动画 (豆包是有的，第一版本暂未添加)
           console.log('执行关闭动画');
         }
         else {
-          // 小于的时候执行打开动画
+          // 小于的时候执行打开动画 (豆包是有的，第一版本暂未添加)
           console.log('小于的时候执行打开动画');
         }
         break;
       case 'narrowExpandWideCollapse':
         designStore.setCollapse(isAbove);
     }
-    console.log('最终的折叠状态：', designStore.isCollapse);
+    // console.log('最终的折叠状态：', designStore.isCollapse);
 
     if (!designStore.isCollapse) {
       document.documentElement.style.setProperty(

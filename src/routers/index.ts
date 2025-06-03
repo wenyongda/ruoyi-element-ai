@@ -20,10 +20,6 @@ const router = createRouter({
   scrollBehavior: () => ({ left: 0, top: 0 }),
 });
 
-console.group('Routes');
-console.log('routes', router.getRoutes());
-console.groupEnd();
-
 // 路由前置守卫
 router.beforeEach(
   async (

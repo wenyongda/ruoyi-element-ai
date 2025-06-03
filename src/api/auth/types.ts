@@ -1,6 +1,9 @@
 export interface LoginDTO {
   username: string;
   password: string;
+  code?: string;
+  // 二次确认密码
+  confirmPassword?: string;
 }
 
 export interface LoginVO {
@@ -115,4 +118,29 @@ export interface RoleDTO {
    * 角色名称
    */
   roleName?: string;
+}
+
+// 邮箱验证码
+export interface EmailCodeDTO {
+  username?: string;
+}
+
+// 邮箱注册
+export interface RegisterDTO {
+  /**
+   * 邮箱
+   */
+  username: string;
+  /**
+   * 密码
+   */
+  password: string;
+  /**
+   * 验证码
+   */
+  code: string;
+  /**
+   * 确认密码
+   */
+  confirmPassword?: string;
 }

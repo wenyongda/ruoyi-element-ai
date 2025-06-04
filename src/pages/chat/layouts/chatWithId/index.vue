@@ -43,6 +43,8 @@ const bubbleListRef = ref<BubbleListInstance | null>(null);
 const isLoading = ref(false);
 // 记录发送的返回
 let sendRequest: HookFetchRequest<any, any> | null = null;
+// 记录进入思考中
+let isThinking = false;
 
 watch(
   () => route.params?.id,
@@ -95,23 +97,47 @@ function handleDataChunk(chunk: AnyObject) {
       // 开始思考链状态
       bubbleItems.value[bubbleItems.value.length - 1].thinkingStatus = 'thinking';
       bubbleItems.value[bubbleItems.value.length - 1].loading = true;
+      bubbleItems.value[bubbleItems.value.length - 1].thinlCollapse = true;
       if (bubbleItems.value.length) {
         bubbleItems.value[bubbleItems.value.length - 1].reasoning_content += reasoningChunk;
       }
     }
 
+    // 另一种思考中形式，content中有 <think></think> 的格式
+    // 一开始匹配到 <think> 开始，匹配到 </think> 结束，并处理标签中的内容为思考内容
     const parsedChunk = chunk.choices?.[0].delta.content;
     if (parsedChunk) {
-      // 结束 思考链状态
-      bubbleItems.value[bubbleItems.value.length - 1].thinkingStatus = 'end';
-      bubbleItems.value[bubbleItems.value.length - 1].loading = false;
-
-      if (bubbleItems.value.length) {
-        bubbleItems.value[bubbleItems.value.length - 1].content += parsedChunk;
+      const thinkStart = parsedChunk.includes('<think>');
+      const thinkEnd = parsedChunk.includes('</think>');
+      if (thinkStart) {
+        isThinking = true;
+      }
+      if (thinkEnd) {
+        isThinking = false;
+      }
+      if (isThinking) {
+        // 开始思考链状态
+        bubbleItems.value[bubbleItems.value.length - 1].thinkingStatus = 'thinking';
+        bubbleItems.value[bubbleItems.value.length - 1].loading = true;
+        bubbleItems.value[bubbleItems.value.length - 1].thinlCollapse = true;
+        if (bubbleItems.value.length) {
+          bubbleItems.value[bubbleItems.value.length - 1].reasoning_content += parsedChunk
+            .replace('<think>', '')
+            .replace('</think>', '');
+        }
+      }
+      else {
+        // 结束 思考链状态
+        bubbleItems.value[bubbleItems.value.length - 1].thinkingStatus = 'end';
+        bubbleItems.value[bubbleItems.value.length - 1].loading = false;
+        if (bubbleItems.value.length) {
+          bubbleItems.value[bubbleItems.value.length - 1].content += parsedChunk;
+        }
       }
     }
   }
   catch (err) {
+    // 这里如果使用了中断，会有报错，可以忽略不管
     console.error('解析数据时出错:', err);
   }
 }
@@ -189,6 +215,7 @@ function addMessage(message: string, isUser: boolean) {
     content: message || '',
     reasoning_content: '',
     thinkingStatus: 'start',
+    thinlCollapse: false,
   };
   bubbleItems.value.push(obj);
 }
@@ -226,6 +253,7 @@ watch(
         <template #header="{ item }">
           <Thinking
             v-if="item.reasoning_content"
+            v-model="item.thinlCollapse"
             :content="item.reasoning_content"
             :status="item.thinkingStatus"
             class="thinking-chain-warp"

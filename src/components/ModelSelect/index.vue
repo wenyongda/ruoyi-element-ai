@@ -111,6 +111,7 @@ function handleClick(item: GetSessionListVO) {
 .model-select-box {
   color: var(--el-color-primary, #409eff);
   border: 1px solid var(--el-color-primary, #409eff);
+  background: var(--el-color-primary-light-9, rgb(235.9, 245.3, 255));
   border-radius: 10px;
 }
 

@@ -25,6 +25,7 @@ export const useChatStore = defineStore('chat', () => {
   const setChatMap = (id: string, data: ChatMessageVo[]) => {
     chatMap.value[id] = data?.map((item: ChatMessageVo) => {
       const isUser = item.role === 'user';
+      const thinkContent = extractThkContent(item.content as string);
       return {
         ...item,
         key: item.id,
@@ -37,6 +38,10 @@ export const useChatStore = defineStore('chat', () => {
           : 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
         avatarSize: '32px',
         typing: false,
+        reasoning_content: thinkContent,
+        thinkingStatus: 'end',
+        content: extractThkContentAfter(item.content as string),
+        thinlCollapse: false,
       };
     });
   };
@@ -59,6 +64,27 @@ export const useChatStore = defineStore('chat', () => {
       console.error('getChatList:', error);
     }
   };
+
+  // 对思考中的内容回显做处理
+  function extractThkContent(content: string) {
+    const regex = /<think>(.*?)<\/think>/s;
+    const matchResult = content.match(regex);
+    // 把这些内容从 content 中移除
+    content = content.replace(regex, '');
+    return matchResult?.[1] ?? '';
+  }
+
+  // 如果有 </think> 标签，则把 </think> 之后的 内容从 content 中返回
+  function extractThkContentAfter(content: string) {
+    if (!content.includes('</think>')) {
+      return content;
+    }
+    const regex = /<\/think>(.*)/s;
+    const matchResult = content.match(regex);
+    // 把这些内容从 content 中移除
+    content = content.replace(regex, '');
+    return matchResult?.[1] ?? '';
+  }
 
   return {
     chatMap,

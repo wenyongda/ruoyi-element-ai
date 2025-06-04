@@ -1,3 +1,4 @@
+// 枚举库，暂时未用到，后续版本可能会用到
 import type { EnumValue } from '@jsonlee_12138/enum';
 import Enum from '@jsonlee_12138/enum';
 

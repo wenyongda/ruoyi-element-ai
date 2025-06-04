@@ -13,7 +13,7 @@ export const layoutRouter: RouteRecordRaw[] = [
         name: 'chat',
         component: () => import('@/pages/chat/index.vue'),
         meta: {
-          title: '通用聊天页面',
+          // title: '通用聊天页面',
           isDefaultChat: true,
           icon: 'HomeFilled',
           isHide: '1',
@@ -27,7 +27,7 @@ export const layoutRouter: RouteRecordRaw[] = [
         name: 'chatWithId',
         component: () => import('@/pages/chat/index.vue'),
         meta: {
-          title: '带 ID 的聊天页面',
+          // title: '带 ID 的聊天页面',
           isDefaultChat: false,
         },
       },

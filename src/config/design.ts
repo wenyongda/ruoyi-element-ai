@@ -62,6 +62,7 @@ const design: DesignConfigState = {
   // 是否开启路由动画
   isPageAnimate: false,
   // 路由动画类型
+  // 需要自定义路由动画可以把 Main 组件样式代码注释放开，从新对话切换到带id的路由时，会执行这个动画样式
   pageAnimateType: 'zoom-fade',
   // 布局模式 (纵向：vertical | ... | 自己定义)
   layout: 'vertical',

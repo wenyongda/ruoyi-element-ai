@@ -2,9 +2,6 @@
 // 首页地址[默认]
 export const HOME_URL: string = '/chat';
 
-// 登录页地址[默认]
-// export const LOGIN_URL: string = '/login';
-
 // 默认主题颜色
 export const DEFAULT_THEME_COLOR: string = '#2992FF';
 

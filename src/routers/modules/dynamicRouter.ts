@@ -12,7 +12,7 @@ export async function initDynamicRouter() {
     await authStore.requestAuthMenuList();
 
     // 2、判断当前用户是否拥有菜单权限
-    console.log('authStore.authMenuList', authStore.authMenuList);
+    // console.log('authStore.authMenuList', authStore.authMenuList);
 
     if (authStore.authMenuList == null || authStore.authMenuList.length === 0) {
       userStore.logout();

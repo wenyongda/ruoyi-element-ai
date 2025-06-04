@@ -34,14 +34,6 @@ function jwtPlugin(): HookFetchPlugin<BaseResponse> {
       if (response.result?.code === 200) {
         return response;
       }
-      // 处理500逻辑
-      if (response.result?.code === 500) {
-        router.replace({
-          name: '500',
-        });
-        ElMessage.error(response.result?.msg);
-        return Promise.reject(response);
-      }
       // 处理403逻辑
       if (response.result?.code === 403) {
         // 跳转到403页面（确保路由已配置）

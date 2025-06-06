@@ -2,7 +2,7 @@
 
 <div align="center">
 
-  [![GitHub Stars](https://img.shields.io/github/stars/element-plus-x/ruoyi-element-ai?style=social)](https://github.com/element-plus-x/ruoyi-element-ai)&emsp;[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/element-plus-x/ruoyi-element-ai/blob/main/LICENSE)&emsp;[![GitHub Stars](https://img.shields.io/github/stars/element-plus-x/ruoyi-element-ai?style=social)](https://github.com/element-plus-x/ruoyi-element-ai)&emsp;[![Vue 3.5](https://img.shields.io/badge/Vue-3.5-4FC08D?logo=vue.js)](https://vuejs.org/)&emsp;[![Vite 5](https://img.shields.io/badge/Vite-5-646CFF?logo=vite)](https://vitejs.dev/)&emsp;[![TypeScript 5.8](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript)](https://www.typescriptlang.org/)&emsp;
+  [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/element-plus-x/ruoyi-element-ai/blob/main/LICENSE)&emsp;[![Vue 3.5](https://img.shields.io/badge/Vue-3.5-4FC08D?logo=vue.js)](https://vuejs.org/)&emsp;[![Vite 5](https://img.shields.io/badge/Vite-5-646CFF?logo=vite)](https://vitejs.dev/)&emsp;[![TypeScript 5.8](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript)](https://www.typescriptlang.org/)&emsp;[![GitHub Stars](https://img.shields.io/github/stars/element-plus-x/ruoyi-element-ai?style=social)](https://github.com/element-plus-x/ruoyi-element-ai)&emsp;
 
 </div>
 

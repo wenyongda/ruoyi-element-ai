@@ -76,7 +76,7 @@ pnpm cz            # 规范提交（自动执行lint）
 ## 🌹 赠人玫瑰，手有余香
 <div align="center">
 <p>😍开源是热爱的坚持，您的每一份心意都让我们走得更远～😍</p>
-<img src="https://cdn.element-plus-x.com/zs5.png" alt="赞赏" width="180" height="100%" />
+<img src="https://cdn.element-plus-x.com/zs5.png" alt="赞赏" width="230px" height="100%" />
 <h3 style="color: #fa8c16; margin-bottom: 10px;">🙊感谢您的支持！🙊</h3>
 <p style="color: #666; margin: 15px 0;">💖感谢每一份温暖助力💖</p>
 <p style="color: #666; margin: 15px 0;">💌 扫码赞赏，后续将截图保留，并公示赞赏记录 💌</p>

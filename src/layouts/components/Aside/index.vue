@@ -331,7 +331,6 @@ function handleMenuCommand(command: string, item: ConversationItem<ChatSessionVo
   opacity: 0;
 
   // 指定样式过渡
-
   // 向左偏移一个宽度
   transform: translateX(-100%);
   transition:

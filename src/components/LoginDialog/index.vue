@@ -113,8 +113,8 @@ function onAfterLeave() {
 /* 动画样式（仅作用于弹框） */
 .dialog-zoom-enter-active,
 .dialog-zoom-leave-active {
-  transform-origin: center;
   transition: all 0.3s ease-in-out;
+  transform-origin: center;
 }
 .dialog-zoom-enter-from,
 .dialog-zoom-leave-to {
@@ -141,8 +141,8 @@ function onAfterLeave() {
   overflow: hidden;
   user-select: none;
   background-color: rgb(0 0 0 / 50%);
-  opacity: 1;
   backdrop-filter: blur(3px);
+  opacity: 1;
   transition: opacity 0.3s;
 }
 .mask[hidden] {
@@ -171,7 +171,11 @@ function onAfterLeave() {
   justify-content: center;
   width: calc(var(--login-dialog-width) / 2);
   padding: var(--login-dialog-section-padding);
-  background: linear-gradient(233deg, rgb(113 161 255 / 60%) 17.67%, rgb(154 219 255 / 60%) 70.4%);
+  background: linear-gradient(
+    233deg,
+    rgb(113 161 255 / 60%) 17.67%,
+    rgb(154 219 255 / 60%) 70.4%
+  );
 }
 .left-section .logo-wrap {
   display: flex;
@@ -185,9 +189,9 @@ function onAfterLeave() {
   height: 40px;
   padding: 4px;
   background: var(--login-dialog-logo-background);
+  filter: drop-shadow(0 4px 4px rgb(0 0 0 / 10%));
   border-radius: 12px;
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 8%);
-  filter: drop-shadow(0 4px 4px rgb(0 0 0 / 10%));
 }
 .left-section .logo-wrap .logo-text {
   font-size: 16px;

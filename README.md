@@ -11,10 +11,10 @@
 **ruoyi-element-ai** 是基于 **Vue3.5** + **Element-Plus-X** + **TypeScript** 的企业级AI应用模板，搭配 **ruoyi-ai** 后端，快速构建仿豆包/通义的全栈AI项目。
 
 ## 💡 核心优势
-- 最新技术栈：Vue3.5/Vite5/Pinia3/TypeScript5.8
-- 流式交互：Hook-Fetch支持Server-Sent Events
+- 最新技术栈：Vue3.5+/Vite6/Pinia3/TypeScript5
+- 流式交互：Hook-Fetch支持Server-Sent Events，插件化写法优雅的一批
 - 企业级规范：ESLint/Stylelint/husky/commitlint全链路校验
-- 开箱即用：内置动态路由、状态管理、组件库封装
+- 开箱即用：内置动态路由、状态管理、组件库封装、hooks封装
 
 <div align="center">
 <img src="https://cdn.element-plus-x.com/chat/1.webp" calss="element-plus-x-bubble" />

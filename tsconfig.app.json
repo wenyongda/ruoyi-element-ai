@@ -7,7 +7,6 @@
       "@/*": ["src/*"]
     },
     "typeRoots": ["./node_modules/@types", "./types"],
-    // "types": ["element-plus/global"],
     /* Linting */
     "strict": true,
     "noFallthroughCasesInSwitch": true,

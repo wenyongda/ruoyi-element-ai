@@ -1,5 +1,6 @@
 import antfu from "@antfu/eslint-config";
 
+// 使用 antfu 配置
 export default antfu({
   vue: {
     "vue/block-order": [

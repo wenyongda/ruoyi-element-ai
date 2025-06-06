@@ -8,7 +8,9 @@
     // 推荐扩展 unocss 官方推荐
     "antfu.unocss",
     // 推荐扩展 eslint 官方推荐
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    // 推荐扩展 stylelint 官方推荐 格式化 scss 代码问题
+    "stylelint.vscode-stylelint"
   ]
 }
 

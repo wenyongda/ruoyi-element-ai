@@ -209,16 +209,15 @@ function handleMenuCommand(command: string, item: ConversationItem<ChatSessionVo
 <style scoped lang="scss">
 // 基础样式
 .aside-container {
-  height: 100%;
-  left: 0;
-  top: 0;
   position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 11;
   width: var(--sidebar-default-width);
+  height: 100%;
   pointer-events: auto;
   background-color: var(--sidebar-background-color);
-  border-right: 0.5px solid var(--s-color-border-tertiary, rgba(0, 0, 0, 0.08));
-  z-index: 11;
-
+  border-right: 0.5px solid var(--s-color-border-tertiary, rgb(0 0 0 / 8%));
   .aside-wrapper {
     display: flex;
     flex-direction: column;
@@ -226,33 +225,30 @@ function handleMenuCommand(command: string, item: ConversationItem<ChatSessionVo
 
     // 侧边栏头部样式
     .aside-header {
-      height: 36px;
-      margin: 10px 12px 0px;
       display: flex;
       align-items: center;
-
+      height: 36px;
+      margin: 10px 12px 0;
       .logo-img {
+        box-sizing: border-box;
         width: 36px;
         height: 36px;
-        border-radius: 50%;
-        background-color: #fff;
-        overflow: hidden;
-        box-sizing: border-box;
         padding: 4px;
-
+        overflow: hidden;
+        background-color: #ffffff;
+        border-radius: 50%;
         img {
-          width: 100%;
-          height: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
+          width: 100%;
+          height: 100%;
         }
       }
-
       .logo-text {
         font-size: 16px;
-        color: rgba(0, 0, 0, 0.85);
         font-weight: 700;
+        color: rgb(0 0 0 / 85%);
         transform: skewX(-2deg);
       }
     }
@@ -261,56 +257,49 @@ function handleMenuCommand(command: string, item: ConversationItem<ChatSessionVo
     .aside-body {
       .creat-chat-btn-wrapper {
         padding: 0 12px;
-
         .creat-chat-btn {
-          user-select: none;
           display: flex;
+          gap: 6px;
           align-items: center;
           padding: 8px 6px;
           margin-top: 16px;
           margin-bottom: 6px;
           color: #0057ff;
-          background-color: rgba(0, 87, 255, 0.06);
-          border-radius: 12px;
-          border: 1px solid rgba(0, 102, 255, 0.15);
           cursor: pointer;
-          gap: 6px;
-
+          user-select: none;
+          background-color: rgb(0 87 255 / 6%);
+          border: 1px solid rgb(0 102 255 / 15%);
+          border-radius: 12px;
           &:hover {
-            background-color: rgba(0, 87, 255, 0.12);
+            background-color: rgb(0 87 255 / 12%);
           }
-
           .creat-chat-text {
             font-size: 14px;
             font-weight: 700;
             line-height: 22px;
           }
-
           .add-icon {
-            font-size: 16px;
             width: 24px;
             height: 24px;
+            font-size: 16px;
           }
-
           .svg-icon {
-            margin-left: auto;
             height: 24px;
-            color: rgba(0, 87, 255, 0.3);
+            margin-left: auto;
+            color: rgb(0 87 255 / 30%);
           }
         }
       }
-
       .aside-content {
         display: flex;
+        flex: 1;
         flex-direction: column;
         height: 100%;
-        flex: 1;
         min-height: 0;
 
         // 会话列表高度-基础样式
         .conversations-wrap {
           height: calc(100vh - 110px);
-
           .label {
             display: flex;
             align-items: center;
@@ -325,63 +314,58 @@ function handleMenuCommand(command: string, item: ConversationItem<ChatSessionVo
 // 折叠样式
 .aside-container-collapse {
   position: absolute;
-  opacity: 0;
-  // 向左偏移一个宽度
-  transform: translateX(-100%);
   top: 54px;
-  border-radius: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow:
-    0px 10px 20px 0px rgba(0, 0, 0, 0.1),
-    0px 0px 1px 0px rgba(0, 0, 0, 0.15);
-  height: auto;
   z-index: 22;
-  overflow: hidden;
+  height: auto;
   max-height: calc(100% - 110px);
   padding-bottom: 12px;
+  overflow: hidden;
+
+  /* 禁用悬停事件 */
+  pointer-events: none;
+  border: 1px solid rgb(0 0 0 / 8%);
+  border-radius: 15px;
+  box-shadow:
+    0 10px 20px 0 rgb(0 0 0 / 10%),
+    0 0 1px 0 rgb(0 0 0 / 15%);
+  opacity: 0;
 
   // 指定样式过渡
-  transition-property: opacity, transform;
-  transition-duration: 0.3s, 0.3s;
-  transition-timing-function: ease, ease;
-  transition-delay: 0.3s, 0.3s;
+
+  // 向左偏移一个宽度
+  transform: translateX(-100%);
+  transition:
+    opacity 0.3s ease 0.3s,
+    transform 0.3s ease 0.3s;
 
   /* 新增：未激活悬停时覆盖延迟 */
   &.no-delay {
     transition-delay: 0s, 0s;
-  }
-
-  /* 禁用悬停事件 */
-  pointer-events: none;
-
-  &:hover,
-  &.aside-container-suspended {
-    pointer-events: auto;
-    /* 悬停激活后恢复事件响应 */
   }
 }
 
 // 悬停样式
 .aside-container-collapse:hover,
 .aside-container-collapse.aside-container-suspended {
-  // 直接在这里写悬停时的样式（与 aside-container-suspended 一致）
-  opacity: 1;
-  transform: translateX(15px);
-  border-radius: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow:
-    0px 10px 20px 0px rgba(0, 0, 0, 0.1),
-    0px 0px 1px 0px rgba(0, 0, 0, 0.15);
   height: auto;
-  overflow: hidden;
   max-height: calc(100% - 110px);
   padding-bottom: 12px;
+  overflow: hidden;
+  pointer-events: auto;
+  border: 1px solid rgb(0 0 0 / 8%);
+  border-radius: 15px;
+  box-shadow:
+    0 10px 20px 0 rgb(0 0 0 / 10%),
+    0 0 1px 0 rgb(0 0 0 / 15%);
+
+  // 直接在这里写悬停时的样式（与 aside-container-suspended 一致）
+  opacity: 1;
 
   // 过渡动画沿用原有设置
-  transition-property: opacity, transform;
-  transition-duration: 0.3s, 0.3s;
-  transition-timing-function: ease, ease;
-  transition-delay: 0s, 0s;
+  transform: translateX(15px);
+  transition:
+    opacity 0.3s ease 0s,
+    transform 0.3s ease 0s;
 
   // 会话列表高度-悬停样式
   .conversations-wrap {

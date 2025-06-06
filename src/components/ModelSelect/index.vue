@@ -110,24 +110,20 @@ function handleClick(item: GetSessionListVO) {
 <style scoped lang="scss">
 .model-select-box {
   color: var(--el-color-primary, #409eff);
+  background: var(--el-color-primary-light-9, rgb(235.9 245.3 255));
   border: 1px solid var(--el-color-primary, #409eff);
-  background: var(--el-color-primary-light-9, rgb(235.9, 245.3, 255));
   border-radius: 10px;
 }
-
 .popover-content-box-item.is-select {
-  color: var(--el-color-primary, #409eff);
   font-weight: 700;
+  color: var(--el-color-primary, #409eff);
 }
-
 .popover-content-box {
-  height: 200px;
-  gap: 4px;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  overflow-x: hidden;
-
+  gap: 4px;
+  height: 200px;
+  overflow: hidden auto;
   .popover-content-box-items {
     :deep() {
       .popover-trigger-item-text {
@@ -135,23 +131,20 @@ function handleClick(item: GetSessionListVO) {
       }
     }
   }
-
   .popover-content-box-item-text {
-    background-color: black;
     color: white;
+    background-color: black;
   }
 
   // 滚动条样式
   &::-webkit-scrollbar {
     width: 4px;
   }
-
   &::-webkit-scrollbar-track {
     background: #f5f5f5;
   }
-
   &::-webkit-scrollbar-thumb {
-    background: #ccc;
+    background: #cccccc;
     border-radius: 4px;
   }
 }

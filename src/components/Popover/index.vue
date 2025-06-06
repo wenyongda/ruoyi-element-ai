@@ -3,19 +3,19 @@ import type { CSSProperties } from 'vue';
 import { arrow, autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/vue';
 import { onClickOutside } from '@vueuse/core';
 
-export type PopoverPlacement =
-  | 'top'
-  | 'top-start'
-  | 'top-end'
-  | 'bottom'
-  | 'bottom-start'
-  | 'bottom-end'
-  | 'left'
-  | 'left-start'
-  | 'left-end'
-  | 'right'
-  | 'right-start'
-  | 'right-end';
+export type PopoverPlacement
+  = | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end';
 
 export type Offset = [number, number];
 
@@ -190,13 +190,11 @@ function handleClick() {
     transform 0.2s ease;
   will-change: transform, opacity;
 }
-
 .popover-fade-enter-from,
 .popover-fade-leave-to {
   opacity: 0;
   transform: scale(0.95);
 }
-
 .popover-fade-enter-to,
 .popover-fade-leave-from {
   opacity: 1;

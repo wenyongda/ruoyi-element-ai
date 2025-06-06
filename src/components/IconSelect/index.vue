@@ -76,26 +76,22 @@ function selectedIcon(name: string) {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
   }
-
   .icon-item {
-    cursor: pointer;
-    padding: 0px 4px;
-    margin: 3px 0 3px !important;
     width: fit-content !important;
     height: fit-content;
-    text-align: center;
+    padding: 0 4px;
+    margin: 3px 0 !important;
     font-size: 18px;
+    text-align: center;
+    cursor: pointer;
   }
-
   .icon-item:hover {
     box-shadow: 1px 1px 10px 0 #a1a1a1;
   }
-
   .el-tab-pane {
     height: 200px;
     overflow: auto;
   }
-
   .icon_name {
     display: none;
   }
@@ -106,58 +102,48 @@ function selectedIcon(name: string) {
   .icon-body {
     padding: 10px;
   }
-
   .icon_name {
     display: block;
   }
 
   overflow: hidden;
-
   .grid-container {
-    margin-top: 12px;
     position: relative;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    border-left: 1px solid #eee;
-    border-top: 1px solid #eee;
-    overflow-y: auto;
-    overflow-x: hidden;
     height: 500px;
+    margin-top: 12px;
+    overflow: hidden auto;
+    border-top: 1px solid #eeeeee;
+    border-left: 1px solid #eeeeee;
   }
-
   .icon-item {
+    width: 100% !important;
     padding: 16px 0;
     margin: 0 !important;
-    border-right: 1px solid #eee;
-    border-bottom: 1px solid #eee;
     margin-right: -1px;
     margin-bottom: -1px;
-    width: 100% !important;
     text-align: center;
+    border-right: 1px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
   }
-
   span {
     display: block;
-    font-size: 16px;
     margin-top: 4px;
+    font-size: 16px;
   }
-
   .disabled {
     pointer-events: none;
   }
-
   .grid {
-    border-top: 1px solid #eee;
+    border-top: 1px solid #eeeeee;
   }
 }
-
-.icons-container span {
-  font-size: 12px !important;
-  color: #99a9bf;
-}
-
 .icons-container svg {
-  font-size: 24px !important;
-  color: #606266;
+  span,
+  svg {
+    font-size: 24px !important;
+    color: #606266;
+  }
 }
 </style>

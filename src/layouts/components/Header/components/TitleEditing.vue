@@ -74,15 +74,14 @@ function handleClickTitle() {
   transition: all 0.3s ease;
   &:hover {
     .svg-icon {
-      opacity: 1;
       display: block;
+      opacity: 1;
     }
   }
-
   .svg-icon {
-    transition: all 0.3s ease;
-    opacity: 0.5;
     display: none;
+    opacity: 0.5;
+    transition: all 0.3s ease;
   }
 }
 </style>

@@ -12,6 +12,11 @@
   "*.vue": [
     "prettier --write",
     "eslint --fix",
+    "stylelint --fix",
+    "git add"
+  ],
+  "*.{scss,less,styl,html}": [
+    "stylelint --fix",
     "git add"
   ]
 }

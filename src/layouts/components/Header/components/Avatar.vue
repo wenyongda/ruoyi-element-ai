@@ -130,12 +130,11 @@ function handleClick(item: any) {
   width: 520px;
   height: 520px;
 }
-
 .popover-content-box {
-  background: #fff;
+  padding: 8px;
+  background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  padding: 8px;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 8%);
 }
 </style>

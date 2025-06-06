@@ -18,14 +18,14 @@ const sessionId = computed(() => route.params?.id);
 
 <style lang="scss" scoped>
 .chat-container {
-  padding: 0 16px;
-  width: calc(100% - 32px);
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: calc(100% - 32px);
   height: 100%;
+  padding: 0 16px;
   overflow-anchor: none;
 }
 </style>

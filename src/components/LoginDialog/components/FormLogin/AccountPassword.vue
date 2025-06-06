@@ -103,20 +103,18 @@ async function handleSubmit() {
   flex-direction: column;
   gap: 16px;
 }
-
 .form-group {
   display: flex;
-  align-items: center;
   gap: 8px;
+  align-items: center;
 }
-
 .login-btn {
-  margin-top: 24px;
   padding: 12px;
-  background: #409eff;
+  margin-top: 24px;
   color: white;
+  cursor: pointer;
+  background: #409eff;
   border: none;
   border-radius: 4px;
-  cursor: pointer;
 }
 </style>

@@ -324,48 +324,41 @@ watch(
 <style scoped lang="scss">
 .chat-with-id-container {
   position: relative;
-  width: 100%;
-  max-width: 800px;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  width: 100%;
+  max-width: 800px;
+  height: 100%;
   .chat-warp {
-    width: 100%;
-    height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
+    width: 100%;
+    height: calc(100vh - 60px);
     .thinking-chain-warp {
       margin-bottom: 12px;
     }
   }
-
   :deep() {
     .el-bubble-list {
       padding-top: 24px;
     }
-
     .el-bubble {
       padding: 0 12px;
       padding-bottom: 24px;
     }
-
     .el-typewriter {
-      border-radius: 12px;
       overflow: hidden;
+      border-radius: 12px;
     }
-
     .markdown-body {
       background-color: transparent;
     }
   }
-
   .chat-defaul-sender {
-    margin-bottom: 22px;
     width: 100%;
+    margin-bottom: 22px;
   }
 }
 </style>

@@ -43,22 +43,19 @@ useWindowWidthObserver();
 
 <style lang="scss" scoped>
 .layout-container {
+  position: relative;
   width: 100%;
   height: 100vh;
-  position: relative;
   overflow: hidden;
-
   .layout-header {
     padding: 0;
   }
-
   .layout-main {
-    padding: 0;
     height: 100%;
+    padding: 0;
   }
-
   .layout-container-main {
-    margin-left: var(--sidebar-left-container-default-width, 0px);
+    margin-left: var(--sidebar-left-container-default-width, 0);
     transition: margin-left 0.3s ease;
   }
 }
@@ -67,7 +64,6 @@ useWindowWidthObserver();
 .el-menu {
   border-right: none;
 }
-
 .layout-scrollbar {
   width: 100%;
 }

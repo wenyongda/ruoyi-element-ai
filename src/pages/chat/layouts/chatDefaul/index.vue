@@ -108,13 +108,12 @@ watch(
 <style scoped lang="scss">
 .chat-defaul-wrap {
   position: relative;
-  width: 100%;
-  max-width: 800px;
-  min-height: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  width: 100%;
+  max-width: 800px;
+  min-height: 450px;
   .chat-defaul-sender {
     width: 100%;
   }

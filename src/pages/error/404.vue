@@ -32,30 +32,25 @@ function handleHomePage() {
 #box {
   overflow: hidden;
 }
-
 #banner {
   margin-top: 60px;
   background: url("@/assets/images/error/404.png") no-repeat;
   background-size: 100%;
 }
-
 .elx-top {
   width: 600px;
   height: 400px;
   margin: 0 auto;
 }
-
 .elx-bottom {
   height: 300px;
   margin-top: 20px;
   text-align: center;
 }
-
 .elx-text1 {
   font-size: 46px;
   font-weight: bold;
 }
-
 .elx-text2 {
   padding-top: 30px;
   font-family: YouYuan;

@@ -31,15 +31,14 @@ function handleCreatChat() {
 
 <style scoped lang="scss">
 .is-disabled {
-  opacity: 0.5;
   cursor: not-allowed;
-
+  opacity: 0.5;
   &:hover {
-    background-color: transparent;
     color: #0057ff;
+    cursor: not-allowed;
+    background-color: transparent;
     border-color: #0057ff;
     border-style: solid;
-    cursor: not-allowed;
     transition: none;
   }
 }

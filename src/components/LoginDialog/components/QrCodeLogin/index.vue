@@ -179,91 +179,78 @@ onBeforeUnmount(() => {
 .qr-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 8px;
-
+  align-items: center;
   .tip {
     font-size: 16px;
     font-weight: 500;
     color: #303133;
   }
-
   .qr-img-wrapper {
     position: relative;
     width: 180px;
     height: 180px;
-    border-radius: 16px;
-    overflow: hidden;
     padding: 12px;
+    overflow: hidden;
     border: 1px solid #f0f2f5;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
-
+    border-radius: 16px;
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 8%);
     .qr-img {
-      width: 100%;
-      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-
+      width: 100%;
+      height: 100%;
       .el-icon {
         font-size: 18px;
         color: #909399;
       }
     }
-
     .expired-overlay,
     .scanned-overlay {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 100%;
+      height: 100%;
       border-radius: 16px;
     }
-
     .expired-overlay {
-      background: hsla(0, 0%, 100%, 0.95);
       cursor: pointer;
-
+      background: hsl(0deg 0% 100% / 95%);
       .expired-content {
         display: flex;
         flex-direction: column;
         gap: 8px;
         text-align: center;
-
         .expired-text {
           font-size: 14px;
           color: #909399;
         }
       }
     }
-
     .scanned-overlay {
-      background: hsla(120, 60%, 97%, 0.95);
       cursor: default;
-
+      background: hsl(120deg 60% 97% / 95%);
       .scanned-content {
         display: flex;
         flex-direction: column;
         gap: 8px;
         align-items: center;
-
         .success-icon {
           font-size: 18px;
           color: #67c23a;
         }
-
         .scanned-text {
           display: flex;
+          gap: 8px;
           align-items: center;
           font-size: 14px;
-          gap: 8px;
           color: #606266;
         }
-
         .countdown-text {
           font-size: 12px;
           color: #909399;

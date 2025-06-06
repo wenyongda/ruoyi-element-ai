@@ -79,14 +79,12 @@ onKeyStroke(event => event.ctrlKey && event.key.toLowerCase() === 'k', handleCtr
 
 <style scoped lang="scss">
 .header-container {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
   width: 100%;
   height: fit-content;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-
   .header-box {
-    height: var(--header-container-default-heigth);
     width: 100%;
     width: calc(
       100% - var(--sidebar-left-container-default-width, 0px) - var(
@@ -94,8 +92,9 @@ onKeyStroke(event => event.ctrlKey && event.key.toLowerCase() === 'k', handleCtr
           0px
         )
     );
-    margin: 0 var(--sidebar-right-container-default-width, 0px) 0
-      var(--sidebar-left-container-default-width, 0px);
+    height: var(--header-container-default-heigth);
+    margin: 0 var(--sidebar-right-container-default-width, 0) 0
+      var(--sidebar-left-container-default-width, 0);
   }
 }
 </style>

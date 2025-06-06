@@ -74,7 +74,7 @@ pnpm cz            # 规范提交（自动执行lint）
 <h3 style="color: #1890ff; margin-bottom: 15px;">微信交流群 & 技术支持</h3>
 <div style="display: flex; justify-content: center; align-items: center; gap: 40px; margin: 20px 0;">
 <div style="text-align: center;">
-<img src="https://cdn.element-plus-x.com/vw-2025-06-06.png" alt="微信交流群" width="180" style="margin-bottom: 10px; border-radius: 4px;" />
+<img src="https://cdn.element-plus-x.com/vx-2025-06-06.png" alt="微信交流群" width="180" style="margin-bottom: 10px; border-radius: 4px;" />
 <p>扫码加入交流群<br>获取最新动态与技术支持</p>
 </div>
 <div style="text-align: center;">

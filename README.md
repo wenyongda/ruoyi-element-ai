@@ -68,23 +68,28 @@ pnpm lint:stylelint # 样式格式化
 pnpm cz            # 规范提交（自动执行lint）
 ```
 
-### 🤝 社区支持
+🤝 社区支持
 <div align="center">
-
-  <img src="https://cdn.element-plus-x.com/vw-2025-06-06.png" alt="微信交流群" width="180" style="margin: 20px;" />
-  <p>加入微信交流群，获取最新动态和技术支持</p>
-
-  <p>交流群如果过期或者失效，可以添加作者 vx</p>
-  <img src="https://cdn.element-plus-x.com/element-plus-x-author-vx.png" alt="作者vx" width="180" style="margin: 20px;" />
-
+<div style="background: #f8f9fa; border-radius: 8px; padding: 20px; max-width: 600px; margin: 0 auto;">
+<h3 style="color: #1890ff; margin-bottom: 15px;">微信交流群 & 技术支持</h3>
+<div style="display: flex; justify-content: center; align-items: center; gap: 40px; margin: 20px 0;">
+<div style="text-align: center;">
+<img src="https://cdn.element-plus-x.com/vw-2025-06-06.png" alt="微信交流群" width="180" style="margin-bottom: 10px; border-radius: 4px;" />
+<p>扫码加入交流群<br>获取最新动态与技术支持</p>
 </div>
-
-### 😍 留下赞赏，助力开源
-
+<div style="text-align: center;">
+<img src="https://cdn.element-plus-x.com/element-plus-x-author-vx.png" alt="作者vx" width="180" style="margin-bottom: 10px; border-radius: 4px;" />
+<p>群过期或失效？<br>扫码添加作者微信</p>
+</div>
+</div>
+</div>
+</div>
+🌟 留下赞赏，助力开源
 <div align="center">
-
-  <p>开源是为爱发电，但电费我想平摊~~🙊</p>
-  <p>💌 欢迎扫码赞赏，后续会将赞赏的记录截图附上。感谢你的支持哇 💖</p>
-  <img src="https://cdn.element-plus-x.com/zs.png" alt="赞赏" width="180" style="margin: 20px;" />
-
+<div style="background: #fff5eb; border-radius: 8px; padding: 20px; max-width: 500px; margin: 0 auto;">
+<h3 style="color: #fa8c16; margin-bottom: 10px;">感谢您的支持！</h3>
+<p>开源是热爱的坚持，您的每一份心意都让我们走得更远～</p>
+<p style="color: #666; margin: 15px 0;">💌 扫码赞赏，后续将公示赞赏记录<br>感谢每一份温暖助力 💖</p>
+<img src="https://cdn.element-plus-x.com/zs.png" alt="赞赏" width="180" style="margin-bottom: 20px; border-radius: 4px;" />
+</div>
 </div>

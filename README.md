@@ -73,11 +73,11 @@ pnpm cz            # 规范提交（自动执行lint）
 |---------------------------------------|-------------------------------------|
 | <img src="https://cdn.element-plus-x.com/vx-2025-06-06.png" alt="微信交流群" width="230px"><br>扫码加入交流群<br>获取最新动态与技术支持 | <img src="https://cdn.element-plus-x.com/vx.png" alt="作者vx" width="230px" ><br>群过期或失效？<br>扫码添加作者微信 |
 
-## 🌟 留下赞赏，助力开源
+## 🌹 赠人玫瑰，手有余香
 <div align="center">
-<h3 style="color: #fa8c16; margin-bottom: 10px;">🙊感谢您的支持！🙊</h3>
 <p>😍开源是热爱的坚持，您的每一份心意都让我们走得更远～😍</p>
 <img src="https://cdn.element-plus-x.com/zs5.png" alt="赞赏" width="180" height="100%" />
+<h3 style="color: #fa8c16; margin-bottom: 10px;">🙊感谢您的支持！🙊</h3>
 <p style="color: #666; margin: 15px 0;">💖感谢每一份温暖助力💖</p>
 <p style="color: #666; margin: 15px 0;">💌 扫码赞赏，后续将截图保留，并公示赞赏记录 💌</p>
 </div>

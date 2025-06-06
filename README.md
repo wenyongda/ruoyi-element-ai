@@ -71,7 +71,7 @@ pnpm cz            # 规范提交（自动执行lint）
 ## 🤝 社区支持
 | 👨‍👨‍👧‍👦 微信交流群                          | 💩 作者微信                          |
 |---------------------------------------|-------------------------------------|
-| <img src="https://cdn.element-plus-x.com/vx-2025-06-06.png" alt="微信交流群" width="180"><br>扫码加入交流群<br>获取最新动态与技术支持 | <img src="https://cdn.element-plus-x.com/element-plus-x-author-vx.png" alt="作者vx" width="180"><br>群过期或失效？<br>扫码添加作者微信 |
+| <img src="https://cdn.element-plus-x.com/vx-2025-06-06.png" alt="微信交流群" width="100%"><br>扫码加入交流群<br>获取最新动态与技术支持 | <img src="https://cdn.element-plus-x.com/element-plus-x-author-vx.png" alt="作者vx" width="100%" ><br>群过期或失效？<br>扫码添加作者微信 |
 
 ## 🌟 留下赞赏，助力开源
 <div align="center">

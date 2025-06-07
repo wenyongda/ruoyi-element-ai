@@ -25,8 +25,8 @@
 | 功能模块         | 说明                          | 链接                                                                 |
 |------------------|-------------------------------|----------------------------------------------------------------------|
 | 🚀 前端仓库 | Gitee/GitHub 代码仓库(感谢 star🥰爱你爱你😘) | [Gitee](https://gitee.com/he-jiayue/ruoyi-element-ai) <br> [GitHub](https://github.com/element-plus-x/ruoyi-element-ai) |
-| 🛠️ 后端仓库 | 待补充（支持Java/Node）        | 待更新                                                               |
-| 📚 前端文档 | 开发指南/组件说明              | [快速了解项目](https://chat-docs.element-plus-x.com)                 |
+| 🛠️ 后端仓库 | Java服务，功能丰富强大      |   [Gitee](https://gitee.com/ageerle/ruoyi-ai) <br> [GitHub](https://github.com/ageerle/ruoyi-ai)    |
+| 📚 前端文档 | 开发指南/组件说明              | [快速了解项目](https://chat-docs.element-plus-x.com)       |
 | 📡 在线演示 | 实时交互体验                    | [立即访问](https://chat.element-plus-x.com)                          |
 
 ## 🧰 核心功能

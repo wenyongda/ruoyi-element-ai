@@ -26,7 +26,7 @@
 帮助你快速熟悉项目
 
 <div align="center">
-<img src="https://cdn.element-plus-x.com/chat/docs.webp" />
+<img src="https://cdn.element-plus-x.com/chat/docs1.webp" />
 </div>
 
 ## 🔗 关键链接

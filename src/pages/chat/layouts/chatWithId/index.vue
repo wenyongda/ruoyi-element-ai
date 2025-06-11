@@ -1,12 +1,12 @@
 <!-- 每个回话对应的聊天内容 -->
 <script setup lang="ts">
-import type { HookFetchRequest } from 'node_modules/hook-fetch/types/utils';
 import type { AnyObject } from 'typescript-api-pro';
 import type { Sender } from 'vue-element-plus-x';
 import type { BubbleProps } from 'vue-element-plus-x/types/Bubble';
 import type { BubbleListInstance } from 'vue-element-plus-x/types/BubbleList';
 import type { FilesCardProps } from 'vue-element-plus-x/types/FilesCard';
 import type { ThinkingStatus } from 'vue-element-plus-x/types/Thinking';
+import { useHookFetch } from 'hook-fetch/vue';
 import { useRoute } from 'vue-router';
 import { send } from '@/api';
 import FilesSelect from '@/components/FilesSelect/index.vue';
@@ -40,9 +40,13 @@ const inputValue = ref('');
 const senderRef = ref<InstanceType<typeof Sender> | null>(null);
 const bubbleItems = ref<MessageItem[]>([]);
 const bubbleListRef = ref<BubbleListInstance | null>(null);
-const isLoading = ref(false);
-// 记录发送的返回
-let sendRequest: HookFetchRequest<any, any> | null = null;
+
+const { stream, loading: isLoading, cancel } = useHookFetch({
+  request: send,
+  onError: (err) => {
+    console.warn('测试错误拦截', err);
+  },
+});
 // 记录进入思考中
 let isThinking = false;
 
@@ -91,7 +95,6 @@ watch(
 // 封装数据处理逻辑
 function handleDataChunk(chunk: AnyObject) {
   try {
-    // console.log('New chunk:', chunk);
     const reasoningChunk = chunk.choices?.[0].delta.reasoning_content;
     if (reasoningChunk) {
       // 开始思考链状态
@@ -153,14 +156,13 @@ async function startSSE(chatContent: string) {
     // console.log('chatContent', chatContent);
     // 清空输入框
     inputValue.value = '';
-    isLoading.value = true;
     addMessage(chatContent, true);
     addMessage('', false);
 
     // 这里有必要调用一下 BubbleList 组件的滚动到底部 手动触发 自动滚动
     bubbleListRef.value?.scrollToBottom();
 
-    sendRequest = send({
+    for await (const chunk of stream({
       messages: bubbleItems.value
         .filter((item: any) => item.role === 'user')
         .map((item: any) => ({
@@ -170,9 +172,7 @@ async function startSSE(chatContent: string) {
       sessionId: route.params?.id !== 'not_login' ? String(route.params?.id) : undefined,
       userId: userStore.userInfo?.userId,
       model: modelStore.currentModelInfo.modelName ?? '',
-    });
-
-    for await (const chunk of sendRequest.stream()) {
+    })) {
       handleDataChunk(chunk.result as AnyObject);
     }
   }
@@ -185,14 +185,12 @@ async function startSSE(chatContent: string) {
     if (bubbleItems.value.length) {
       bubbleItems.value[bubbleItems.value.length - 1].typing = false;
     }
-    isLoading.value = false;
   }
 }
 
 // 中断请求
 async function cancelSSE() {
-  sendRequest?.abort();
-  isLoading.value = false;
+  cancel();
   // 结束最后一条消息打字状态
   if (bubbleItems.value.length) {
     bubbleItems.value[bubbleItems.value.length - 1].typing = false;
@@ -252,38 +250,21 @@ watch(
       <BubbleList ref="bubbleListRef" :list="bubbleItems" max-height="calc(100vh - 240px)">
         <template #header="{ item }">
           <Thinking
-            v-if="item.reasoning_content"
-            v-model="item.thinlCollapse"
-            :content="item.reasoning_content"
-            :status="item.thinkingStatus"
-            class="thinking-chain-warp"
-            @change="handleChange"
+            v-if="item.reasoning_content" v-model="item.thinlCollapse" :content="item.reasoning_content"
+            :status="item.thinkingStatus" class="thinking-chain-warp" @change="handleChange"
           />
         </template>
       </BubbleList>
 
       <Sender
-        ref="senderRef"
-        v-model="inputValue"
-        class="chat-defaul-sender"
-        :auto-size="{
+        ref="senderRef" v-model="inputValue" class="chat-defaul-sender" :auto-size="{
           maxRows: 6,
           minRows: 2,
-        }"
-        variant="updown"
-        clearable
-        allow-speech
-        :loading="isLoading"
-        @submit="startSSE"
-        @cancel="cancelSSE"
+        }" variant="updown" clearable allow-speech :loading="isLoading" @submit="startSSE" @cancel="cancelSSE"
       >
         <template #header>
           <div class="sender-header p-12px pt-6px pb-0px">
-            <Attachments
-              :items="filesStore.filesList"
-              :hide-upload="true"
-              @delete-card="handleDeleteCard"
-            >
+            <Attachments :items="filesStore.filesList" :hide-upload="true" @delete-card="handleDeleteCard">
               <template #prev-button="{ show, onScrollLeft }">
                 <div
                   v-if="show"

@@ -6,18 +6,27 @@
 
 </div>
 
+<div align="center">
+<img src="https://cdn.element-plus-x.com/chat/1.webp" />
+</div>
+
 ## 🚀 项目亮点
 
-**ruoyi-element-ai** 是基于 **Vue3.5** + **Element-Plus-X** + **TypeScript** 的企业级AI应用模板，搭配 **ruoyi-ai** 后端，快速构建仿豆包/通义的全栈AI项目。
+**ruoyi-element-ai** 是基于 **Vue3.5** + **Element-Plus-X** + **hook-fetch** + **TypeScript** + **Eslint9** 开发的企业级AI应用模板，搭配 **ruoyi-ai** 后端，快速构建仿豆包/通义的全栈AI项目。
 
 ## 💡 核心优势
-- 最新技术栈：Vue3.5/Vite5/Pinia3/TypeScript5.8
-- 流式交互：Hook-Fetch支持Server-Sent Events
+- 最新技术栈：Vue3.5+/Vite6/Pinia3/TypeScript5
+- 流式交互：Hook-Fetch支持Server-Sent Events，插件化写法优雅的一批
 - 企业级规范：ESLint/Stylelint/husky/commitlint全链路校验
-- 开箱即用：内置动态路由、状态管理、组件库封装
+- 全栈项目：集成 ruoyi-ai 后端服务，快速开发
+- 开箱即用：内置动态路由、状态管理、组件库封装、hooks封装
+
+## 🎯 开发文档
+
+帮助你快速熟悉项目
 
 <div align="center">
-<img src="https://cdn.element-plus-x.com/chat/1.webp" calss="element-plus-x-bubble" />
+<img src="https://cdn.element-plus-x.com/chat/docs1.webp" />
 </div>
 
 ## 🔗 关键链接
@@ -25,9 +34,9 @@
 | 功能模块         | 说明                          | 链接                                                                 |
 |------------------|-------------------------------|----------------------------------------------------------------------|
 | 🚀 前端仓库 | Gitee/GitHub 代码仓库(感谢 star🥰爱你爱你😘) | [Gitee](https://gitee.com/he-jiayue/ruoyi-element-ai) <br> [GitHub](https://github.com/element-plus-x/ruoyi-element-ai) |
-| 🛠️ 后端仓库 | 待补充（支持Java/Node）        | 待更新                                                               |
-| 📚 前端文档 | 开发指南/组件说明              | [快速了解项目](https://chat-docs.element-plus-x.com)                 |
-| 📡 在线演示 | 实时交互体验                    | [立即访问](https://chat.element-plus-x.com)                          |
+| 🛠️ 后端仓库 | Java服务，功能丰富强大      |   [Gitee](https://gitee.com/ageerle/ruoyi-ai) <br> [GitHub](https://github.com/ageerle/ruoyi-ai)    |
+| 📚 前端文档 | 开发指南/项目说明              | [快速了解项目](https://chat-docs.element-plus-x.com)       |
+| 📡 在线演示 | 实时交互体验                    | [在线预览](https://chat.element-plus-x.com)                          |
 
 ## 🧰 核心功能
 
@@ -68,16 +77,26 @@ pnpm lint:stylelint # 样式格式化
 pnpm cz            # 规范提交（自动执行lint）
 ```
 
+## 🧸 即将推出 （含 ruoyi-ai 接口联调）
+- [x] 会话管理
+- [x] 发送消息
+- [x] 登录注册
+- [ ] md 渲染
+- [ ] 编辑输入框
+- [ ] 文件上传
+- [ ] 其他...
+
 ## 🤝 社区支持
 | 👨‍👨‍👧‍👦 微信交流群                          | 💩 作者微信                          |
 |---------------------------------------|-------------------------------------|
-| <img src="https://cdn.element-plus-x.com/vx-2025-06-06.png" alt="微信交流群" width="100%"><br>扫码加入交流群<br>获取最新动态与技术支持 | <img src="https://cdn.element-plus-x.com/element-plus-x-author-vx.png" alt="作者vx" width="100%" ><br>群过期或失效？<br>扫码添加作者微信 |
+| <img src="https://cdn.element-plus-x.com/vx-2025-06-06.png" alt="微信交流群" width="230px" height="300px" ><br>扫码加入交流群<br>获取最新动态与技术支持 | <img src="https://cdn.element-plus-x.com/vx.png" alt="作者vx" width="230px" height="300px" ><br>群过期或失效？<br>扫码添加作者微信 |
 
-## 🌟 留下赞赏，助力开源
+## 🌹 赠人玫瑰，手有余香
 <div align="center">
-<h3 style="color: #fa8c16; margin-bottom: 10px;">🙊感谢您的支持！🙊</h3>
 <p>😍开源是热爱的坚持，您的每一份心意都让我们走得更远～😍</p>
-<p style="color: #666; margin: 15px 0;">💌 扫码赞赏，后续将截图保留，并公示赞赏记录💌<br>💖感谢每一份温暖助力 💖</p>
-<img src="https://cdn.element-plus-x.com/zs.png" alt="赞赏" width="180" style="margin-bottom: 20px; border-radius: 4px;" />
+<img src="https://cdn.element-plus-x.com/zs1.webp" alt="赞赏" width="230px" height="100%" />
+<h3 style="color: #fa8c16; margin-bottom: 10px;">🙊扫码赞赏，感谢您的支持！🙊</h3>
+<p style="color: #666; margin: 15px 0;">💖感谢每一份温暖助力💖</p>
+<p style="color: #666; margin: 15px 0;">💌 后续将截图保留，并公示赞赏记录 💌</p>
 </div>
 </div>

@@ -16,9 +16,9 @@ export const layoutRouter: RouteRecordRaw[] = [
           // title: '通用聊天页面',
           isDefaultChat: true,
           icon: 'HomeFilled',
-          isHide: '1',
-          isKeepAlive: '0', // 是否缓存路由数据[0是，1否]
-          isFull: '1', // 是否缓存全屏[0是，1否]
+          // isHide: '1', // 是否在菜单中隐藏[0是，1否] 预留
+          // isKeepAlive: '0', // 是否缓存路由数据[0是，1否] 预留
+          // isFull: '1', // 是否全屏[0是，1否] 预留
           // enName: "Master Station", // 英文名称 预留
         },
       },

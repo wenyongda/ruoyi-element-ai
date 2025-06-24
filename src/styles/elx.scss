@@ -4,26 +4,22 @@
 .image-preview-container {
   flex: none !important;
 }
-
 .elx-files-card-content {
   gap: 8px;
   .elx-files-card-description {
     line-height: 1.35;
   }
 }
-
 .prev-next-btn {
   position: absolute;
   top: calc(50% + 3px);
-   transform: translateY(-50%);
    z-index: 10;
    cursor: pointer;
+   transform: translateY(-50%);
 }
-
 .elx-attachments-file-card-wrap {
   padding-top: 6px;
 }
-
 .elx-attachments-card {
   user-select: none;
 }

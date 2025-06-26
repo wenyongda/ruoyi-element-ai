@@ -49,6 +49,7 @@ const { stream, loading: isLoading, cancel } = useHookFetch({
 });
 // 记录进入思考中
 let isThinking = false;
+let thinkCount = 0;
 
 watch(
   () => route.params?.id,
@@ -117,8 +118,10 @@ function handleDataChunk(chunk: AnyObject) {
       }
       if (thinkEnd) {
         isThinking = false;
+        thinkCount = 0;
       }
       if (isThinking) {
+        thinkCount++;
         // 开始思考链状态
         bubbleItems.value[bubbleItems.value.length - 1].thinkingStatus = 'thinking';
         bubbleItems.value[bubbleItems.value.length - 1].loading = true;
@@ -173,7 +176,12 @@ async function startSSE(chatContent: string) {
       userId: userStore.userInfo?.userId,
       model: modelStore.currentModelInfo.modelName ?? '',
     })) {
-      handleDataChunk(chunk.result as AnyObject);
+      if (thinkCount === 0 || thinkCount !== 1) {
+        handleDataChunk(chunk.result as AnyObject);
+      }
+      else if (thinkCount === 1) {
+        thinkCount++;
+      }
     }
   }
   catch (err) {
